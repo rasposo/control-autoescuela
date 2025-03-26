@@ -13,17 +13,6 @@ try {
     // PARTE 1. RECUPERAR PARÁMETROS
     $profesor_id = $_POST['profesor_id'];
 
-    if ($_POST['perfil_director'] == "1") {
-        $perfil_director = 1;
-    } else {
-        $perfil_director = 0;
-    }
-    
-    if ($_POST['perfil_administrador'] == "1") {
-        $perfil_administrador = 1;
-    } else {
-        $perfil_administrador = 0;
-    }
     
     // PARTE 2. Ponemos los datos en la instancia
     $profesor = new Profesor($profesor_id);
@@ -46,25 +35,17 @@ try {
     $profesor->setEmail($_POST['email']);
     $profesor->setContraseña($_POST['contraseña']);
 
-    $permisos = [];
-    $permiso = [];
-    if ( isset ( $_POST['A2'] )) { $permiso['permiso'] = 'A2'; $permiso['fecha'] = $_POST['A2']; array_push($permisos, $permiso); };
-    if ( isset ( $_POST['A'] ))  { $permiso['permiso'] = 'A'; $permiso['fecha'] = $_POST['A']; array_push($permisos, $permiso); };
-    if ( isset ( $_POST['B'] )) { $permiso['permiso'] = 'B'; $permiso['fecha'] = $_POST['B']; array_push($permisos, $permiso); };
-    if ( isset ( $_POST['C'] )) { $permiso['permiso'] = 'C'; $permiso['fecha'] = $_POST['C']; array_push($permisos, $permiso); };
-    if ( isset ( $_POST['C+E'] )) { $permiso['permiso'] = 'C+E'; $permiso['fecha'] = $_POST['C+E']; array_push($permisos, $permiso); };
-    if ( isset ( $_POST['D'] )) { $permiso['permiso'] = 'D'; $permiso['fecha'] = $_POST['D']; array_push($permisos, $permiso); };
-
-    $profesor->setPermisos($permisos);
-
-
     // PARTE 4. REALIZAR ACCIÓN
     $profesor->saveIntoDB($pdo);
+
+    $id = loadProfeByDNI($pdo, $_POST['DNI']);
+    $id = $id['profesor_id'];
       
     // PARTE 5. DEVOLVER RESULTADO
 	// a) Correcto
     $respuesta = new stdClass();
     $respuesta->id    = 0;
+    $respuesta->profesor_id = $id;
     $respuesta->texto = "Profesor guardado";
     $json_respuesta   = json_encode($respuesta);
     echo ($json_respuesta);

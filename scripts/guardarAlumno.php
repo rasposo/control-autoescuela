@@ -41,7 +41,13 @@ try {
 	// a) Correcto
     $respuesta = new stdClass();
     $respuesta->id    = 0;
-    $respuesta->texto = "Profesor guardado";
+    $respuesta->texto = 'Alumno guardado';
+    
+
+    //cargamos el nuevo alumno
+    $new_alumno = loadAlumByDNI($pdo, $_POST['dni']);
+    $respuesta->alumno_id = $new_alumno['alumno_id'];;
+
     $json_respuesta   = json_encode($respuesta);
     echo ($json_respuesta);
 	  
@@ -52,6 +58,4 @@ try {
     $error->texto = $e->getMessage();
     $json_error   = json_encode($error);
     echo ($json_error);
-}   
-
-?>
+}

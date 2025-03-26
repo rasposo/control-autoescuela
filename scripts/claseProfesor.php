@@ -57,7 +57,7 @@ class Profesor{
         $stmt->execute(array(':pid' => $this->profesor_id));
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $pdo->prepare("SELECT permiso, fecha FROM Prof_permiso WHERE profesor_id = :pid");
+        $stmt = $pdo->prepare("SELECT permiso_id, fecha FROM Prof_permiso WHERE profesor_id = :pid");
         $stmt->execute(array(':pid' => $this->profesor_id));
         $col = $stmt->fetchall(PDO::FETCH_ASSOC);
         $row['permisos'] = $col;
@@ -138,15 +138,19 @@ class Profesor{
                 ':con' => $this->contraseña )
             );
 
-            //borrarmos entradas antiguas de permisos
-            $stmt = $pdo->prepare('DELETE FROM Prof_permiso WHERE profesor_id = :pid' );
-            $stmt->execute(array( ':pid'=> $this->profesor_id));
-            //introducimos las nuevas
             $new_permisos = $this->permisos;
-            foreach( $new_permisos as $permiso) {
-                $stmt = $pdo->prepare('INSERT INTO Prof_permiso (profesor_id, permiso, fecha) VALUES (:pid, :per, :fech)');
+            if ( $new_permisos !== null ) {
+                //borrarmos entradas antiguas de permisos
+                $stmt = $pdo->prepare('DELETE FROM Prof_permiso WHERE profesor_id = :pid' );
+                $stmt->execute(array( ':pid'=> $this->profesor_id));
+
+                //introducimos las nuevas
+                foreach( $new_permisos as $permiso) {
+                $stmt = $pdo->prepare('INSERT INTO Prof_permiso (profesor_id, permiso_id, fecha) VALUES (:pid, :per, :fech)');
                 $stmt->execute(array( ':pid' => $this->profesor_id, ':per' => $permiso['permiso'], ':fech' => $permiso['fecha']));
-            };
+                };
+            }
+
 
 		} else {
 			// Si no existe, inserto
@@ -193,13 +197,6 @@ class Profesor{
             //Actualizo el id del profesor nuevo
             $id = loadProfeByDNI($pdo, $this->DNI);
             $this->profesor_id = $id['profesor_id'];
-		    
-            //Con la id del profesor, inserto los permisos
-            $new_permisos = $this->permisos;
-            foreach($new_permisos as $permiso) {
-                $stmt = $pdo->prepare('INSERT INTO Prof_permiso (profesor_id, permiso, fecha) VALUES (:pid, :per, :fech)');
-                $stmt->execute(array( ':pid' => $this->profesor_id, ':per' => $permiso['permiso'], ':fech' => $permiso['fecha']));
-            }
         }
 	}
 	

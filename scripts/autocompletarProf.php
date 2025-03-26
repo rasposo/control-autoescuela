@@ -8,15 +8,14 @@ if ( ! isset($_SESSION['name']) ) {
 
 require_once 'funciones.php';
 
-$stmt = $pdo->prepare('SELECT * FROM Profesor WHERE nombre LIKE :prefix');
-$stmt->execute(array( ':prefix' => $_REQUEST['term']."%"));
-$retval = array();
-while ( $profe = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-    $retval[] = $profe['nombre']." ".$profe['apellido1']." ".$profe['apellido2'];
-};
+$profe = buscarProfe($pdo, $_REQUEST['term']);
+$profes = [];
 
-echo $retval;
+foreach ( $profe as $p ) {
+  $profesor = $p['nombre']. " ".$p['apellido1']." ".$p['apellido2'];
+  $profesores [] = $profesor;
+}
 
-//echo(json_encode($retval, JSON_PRETTY_PRINT));
+echo(json_encode($profesores, JSON_PRETTY_PRINT));
 
 ?>

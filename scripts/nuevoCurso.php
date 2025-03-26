@@ -14,13 +14,12 @@ try {
   //configuramos el curso con lo básico
   $curso->setAlumnoId($_POST['alumno_id']);
   $permiso = $_POST['curso'];
+  $seccion = $_POST['seccion'];
 
-  $permiso_id = loadPermisoByTipo($pdo, $permiso);
-  $curso->setPermisoId($permiso_id['permiso_id']);
-
+  $curso->setSeccion( $seccion );
+  $curso->setPermisoId( $permiso );
   $curso->setFinalizado(0);
   $curso->setPagado(0);
-  $curso->setProfesorId(2);
 
   $hoy = date("Y/m/d");
   $curso->setFechaInicio($hoy);

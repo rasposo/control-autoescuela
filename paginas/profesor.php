@@ -8,6 +8,8 @@ if ( ! isset($_SESSION['name']) ) {
 }
 
 require_once '../scripts/claseProfesor.php';
+require_once '../scripts/claseCurso.php';
+require_once '../scripts/claseAlumno.php';
 require_once '../scripts/funciones.php';
 
 require_once 'header.html';
@@ -15,6 +17,7 @@ require_once 'head_side.html';
 
 $profesor = new Profesor($_GET['profesor_id']);
 $profesor->loadFromDB($pdo);
+$nombre_profesor = $profesor->getNombre()." ".$profesor->getApellido1()." ".$profesor->getapellido2();
 
 //comprobamos perfil administrador y director
 $admin = "";
@@ -23,22 +26,21 @@ if ( $profesor->getPerfilAdmin() == 1 )    { $admin = 'checked'; };
 if ( $profesor->getPerfilDirector() == 1 ) { $direct = 'checked'; };
 
 //obtengo los cursos donde imparte clase
-$cursos = searchCursoByProfeId($pdo, $profesor->getId());
+$total_cursos = searchCursoByProfeId($pdo, $profesor->getId());
 
-//obtengo los permisos
-$permisos_profesor = $profesor->getPermisos();
+//obtengo los permisos del profesor
+$per_profe = $profesor->getPermisos();
+//añado el nombre del permiso
+$permisos_profesor = [];
+foreach ($per_profe as $p ){
+    $nombre = loadPermisoById($pdo, $p['permiso_id']);
+    $nombre = $nombre['tipo'];
+    $p['permiso'] = $nombre;
+    $permisos_profesor[] = $p;
+}
 
-$A2 = ""; $A = ""; $B = ""; $C = ""; $C_E = ""; $D = "";
-$fechaA2 = ""; $fechaA = ""; $fechaB = ""; $fechaC = ""; $fechaC_E = ""; $fechaD = "";
-
-foreach ($permisos_profesor as $permiso) {
-    if ( $permiso['permiso'] == 'A2' ) { $A2 = "checked"; $fechaA2 = $permiso['fecha']; };
-    if ( $permiso['permiso'] == 'A' )  { $A =  "checked"; $fechaA  = $permiso['fecha']; };
-    if ( $permiso['permiso'] == 'B' )  { $B =  "checked"; $fechaB  = $permiso['fecha']; };
-    if ( $permiso['permiso'] == 'C' )  { $C =  "checked"; $fechaC  = $permiso['fecha']; };
-    if ( $permiso['permiso'] == 'C+E') { $C_E = "checked"; $fechaC_E = $permiso['fecha']; };
-    if ( $permiso['permiso'] == 'D' )  { $D = "checked"; $fechaD = $permiso['fecha']; };
-};
+//Todos los permisos
+$permisos = loadAllPermisos($pdo);
 
 ?>
 
@@ -46,24 +48,13 @@ foreach ($permisos_profesor as $permiso) {
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800"><?= $profesor->getNombre()." ".$profesor->getApellido1() ?></h1>
+                    <h1 class="h3 mb-4 text-gray-800"><?= $nombre_profesor ?></h1>
 
                     <!-- Divider -->
                     <hr class="sidebar-divider my-0">
                     <br>
-
-                    <!-- botones de selección -->
-                    <div class="container-fluid">
-                        <a href="#" class="btn btn-primary btn-icon-split" id="alumnos_adjudicados_button">
-                            <span class="text">Alumnos adjudicados</span>
-                        </a>
-                        <a href="#" class="btn btn-secondary btn-icon-split" id="datos_profesor_button">
-                            <span class="text">Datos profesor</span>
-                        </a>
-                    </div>
-                    <br>
                     
-                    <div class="container-fluid" id="datos_profesor" style="display: none">
+                    <div class="container-fluid" id="datos_profesor">
 
                         <div class="container-fluid">
 
@@ -143,66 +134,87 @@ foreach ($permisos_profesor as $permiso) {
                             </form>
                         </div>
                             
-                            <hr class="sidebar-divider my-0">
+                        <hr class="sidebar-divider my-0">
+                        <br>
 
-                        <!-- Permisos -->
-                        <form class="user" id="permisos_form" method="POST">
-                            <legend>Permisos:</legend>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoA2" name="permisos[]" value="A2" <?= $A2 ?>>
-                                    <label for="permisoA">A2</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaA2" value=<?= $fechaA2 ?>>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoA" name="permisos[]" value="A" <?= $A ?>>
-                                    <label for="permisoA">A</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaA" value=<?= $fechaA ?>>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoB" name="permisos[]" value="B" <?= $B ?>>
-                                    <label for="permisoA">B</ACr></label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaB" value=<?= $fechaB ?>>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoC" name="permisos[]" value="C" <?= $C ?>>
-                                    <label for="permisoA">C</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaC" value=<?= $fechaC ?>>
+                        <div class="row">
+
+                            <!-- Permisos -->
+                            <div class="col-lg-5 mb-3">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Permisos/cursos que puede impartir</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Permiso/Curso</th>
+                                                    <th>Fecha</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                    foreach( $permisos_profesor as $permiso ) {
+                                                        echo('<tr>');
+                                                        echo('<td>'.$permiso['permiso'].'</td><td>'.$permiso['fecha'].'</td>');
+                                                        echo('</tr>');
+                                                    };
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                        <!-- Boton para cambiar permisos -->
+                                        <a href="#" class="btn btn-primary btn-icon-split" id="modificar-permisos-button" 
+                                            data-toggle="modal" data-target="#modificarPermisos">
+                                            <span class="text">Modificar permisos</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoC+E" name="permisos[]" value="C+E" <?= $C_E ?>>
-                                    <label for="permisoA">C+E</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaC+E" value=<?= $fechaC_E ?>>
+
+
+                            <!-- Alumnos adjudicados -->
+                            <div class="col-lg-5 mb-3">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Alumnos adjudicados</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered" width="80%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Alumno</th>
+                                                    <th>Curso</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                    foreach ($total_cursos as $curso_id) {
+
+                                                        $curso = new Curso($curso_id);
+                                                        $curso->loadFromDB($pdo);
+
+                                                        //filtro los que están finalizados
+                                                        if ( $curso->getFinalizado() !== "1" ) {
+
+                                                            $permiso = loadPermisoById($pdo, $curso->getPermisoId());
+
+                                                            $alumno_id = $curso->getAlumnoId();
+                                                            $alumno = new Alumno($alumno_id);
+                                                            $alumno->loadFromDB($pdo);
+
+
+                                                            echo "<tr><td><a href=\"alumno.php?alumno_id=".$alumno_id."\">".$alumno->getNombre()." ".$alumno->getApellido1()." ".$alumno->getapellido2()."</a></td>";
+                                                            echo "<td><a href=\"curso.php?curso_id=".$curso_id."\">".$curso->getNumeroCurso()." - ".$permiso['tipo']."</td></tr>";
+                                                        }
+                                                    }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoD" name="permisos[]" value="D" <?= $D ?>>
-                                    <label for="permisoA">D</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaD" value=<?= $fechaD ?>>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                         <hr class="sidebar-divider my-0">
 
                         <!-- Selección de perfiles -->
@@ -221,35 +233,10 @@ foreach ($permisos_profesor as $permiso) {
                             <hr class="sidebar-divider my-0">
                             <br>
                         </form>
-
-                    </div>
-                    </div>
-
-                    <!-- Alumnos adjudicados -->
-                    <div class="card-body" id="alumnos_adjudicados">
-                        <h2 class="h4 mb-4 text-gray-600">Alumnos adjudicados</h2>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre del alumno</th>
-                                        <th>Permiso</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cuerpo_tabla">
-                                    <?php
-                                    foreach ($cursos as $curso) { 
-                                        echo "<tr><td><a href=\"alumno.php?alumno_id=".$curso['alumno_id']."\">".$curso['nombre']." ".$curso['apellido1']." ".$curso['apellido2']."</a></td>";
-                                        echo "<td><a href=\"curso.php?curso_id=".$curso['curso_id']."\">".$curso['tipo']."</td></tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
 
                     <!-- Botones para guardar, cancelar -->
-                    <div class="container-fluid" id="botones_profesor" style="display: none">
+                    <div class="container-fluid" id="botones_profesor">
                         <!-- Boton para guardar -->
                         <a href="#" class="btn btn-primary btn-icon-split" onclick="llamarAPIguardarProfesor()">
                             <span class="icon text-white-50">
@@ -295,24 +282,51 @@ foreach ($permisos_profesor as $permiso) {
         </div>
     </div>
 
-<script>
-    $(document).ready( function() {
-        //Función para ocultar y mostrar los elementos
-        $('#datos_profesor_button').on("click", function() {
-            $('#alumnos_adjudicados').hide();
-            $('#datos_profesor').show();
-            $('#botones_profesor').show();
-            $('#datos_profesor_button').attr("class", "btn btn-primary btn-icon-split");
-            $('#alumnos_adjudicados_button').attr("class", "btn btn-secondary btn-icon-split")
-        });
-
-        $('#alumnos_adjudicados_button').on("click", function() {
-            $('#datos_profesor').hide();
-            $('#botones_profesor').hide();
-            $('#alumnos_adjudicados').show();
-            $('#alumnos_adjudicados_button').attr("class", "btn btn-primary btn-icon-split");
-            $('#datos_profesor_button').attr("class", "btn btn-secondary btn-icon-split")
-        });
-    });
-
-</script>
+<!-- Modificar permisos -->
+<div class="modal fade" id="modificarPermisos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Modificar permisos</h4>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form class="user" method="POST" id="permisos_form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><?= $nombre_profesor ?></h5>
+                    </div>
+                    <br>
+                    <div class="col-sm-10" >
+                        <table class="table table-bordered" width="80%">
+                            <thead>
+                                <tr><th>Permisos</th><th>Fecha</th></tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    foreach( $permisos as $per ) {
+                                        $checked = "";
+                                        $date = "";
+                                        //comprobamos si el profesor tiene el permiso
+                                        foreach ( $permisos_profesor as $permiso )
+                                            if ( $per['permiso_id'] == $permiso['permiso_id'] ) {
+                                                $checked = "checked";
+                                                $date = $permiso['fecha'];
+                                            };
+                                        echo ('<tr><td><input type="checkbox" name="permisos[]" value='.$per['permiso_id'].' '.$checked.'> '.$per['tipo'].'</td>');
+                                        echo ('<td><input type="date" id="fecha'.$per['permiso_id'].'" value="'.$date.'"></td></tr>');
+                                    } 
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>                  
+                </form>
+                <br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="#" onclick="llamarAPIguardarPermisosProfesor()">Guardar</a>
+                </div>
+            </div>
+        </div>
+</div>

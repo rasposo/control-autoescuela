@@ -108,66 +108,6 @@ $profesor = new Profesor($_GET['profesor_id']);
                         <hr class="sidebar-divider my-0">
                         <br>
 
-                        <!-- Permisos -->
-                        <form class="user" id="permisos_form" method="POST">
-                            <legend>Permisos:</legend>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoA2" name="permisos[]" value="A2">
-                                    <label for="permisoA">A2</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaA2">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoA" name="permisos[]" value="A">
-                                    <label for="permisoA">A</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaA">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoB" name="permisos[]" value="B">
-                                    <label for="permisoA">B</ACr></label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaB">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoC" name="permisos[]" value="C">
-                                    <label for="permisoA">C</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaC">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoC+E" name="permisos[]" value="C+E">
-                                    <label for="permisoA">C+E</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaC+E">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class= "col-sm-1">
-                                    <input type="checkbox" id="permisoD" name="permisos[]" value="D">
-                                    <label for="permisoA">D</label>
-                                </div>
-                                <div class="col-sm3">
-                                    <input type="date" class="form-control form-control-user" id="fechaD">
-                                </div>
-                            </div>
-                        </form>
-                        <hr class="sidebar-divider my-0">
-
                     <!-- Selección de perfiles -->
                     <div class="container-fluid" id="perfiles_profesor">
 

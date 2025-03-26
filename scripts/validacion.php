@@ -1,6 +1,5 @@
 <?php
 require_once "funciones.php";
-print_r($_POST);
 
 if ( isset($_POST['cancel'] ) ) {
     // Redirect the browser to login
@@ -56,4 +55,3 @@ if ( isset($_POST['email']) && isset($_POST['password']) ) {
         }
     }
 }
-?>

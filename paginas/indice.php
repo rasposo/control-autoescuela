@@ -60,6 +60,22 @@ require_once 'head_side.html';
 
                         <!-- Cursos Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-bottom-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="pagos.php">Pagos</a></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cursos Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-bottom-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -68,6 +84,22 @@ require_once 'head_side.html';
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-solid fa-book-open fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Examenes Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-bottom-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="examenes.php">Examenes</a></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-fw fa-tasks fa-2x text-gray-300"></i> 
                                         </div>
                                     </div>
                                 </div>
@@ -84,6 +116,22 @@ require_once 'head_side.html';
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-chart-bar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuración Card -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-bottom-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><a href="configuracion.php">Configuración</a></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-cogs fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

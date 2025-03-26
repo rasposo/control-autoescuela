@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Prof-permiso` (
     REFERENCES `proyecto`.`Permiso` (`permiso_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `profesor-id`
+  CONSTRAINT `prof-permiso_profesor-id`
     FOREIGN KEY (`profesor_id`)
     REFERENCES `proyecto`.`Profesor` (`profesor_id`)
     ON DELETE CASCADE
@@ -123,9 +123,6 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Curso` (
   `alumno_id` INT NULL,
   `prof-permiso_id` INT NULL,
   `fecha_inicio` DATE NULL,
-  `fecha_examen_teorico` DATE NULL,
-  `fecha_examen_destreza` DATE NULL,
-  `fecha_examen_circulacion` DATE NULL,
   `finalizado` TINYINT NULL,
   `fecha_finalizacion` DATE NULL,
   `pagado` TINYINT NULL,
@@ -133,12 +130,12 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Curso` (
   UNIQUE INDEX `curso_id_UNIQUE` (`curso_id` ASC),
   INDEX `alumno_id_idx` (`alumno_id` ASC),
   INDEX `permiso_id_idx` (`prof-permiso_id` ASC),
-  CONSTRAINT `alumno_id`
+  CONSTRAINT `curso_alumno_id`
     FOREIGN KEY (`alumno_id`)
     REFERENCES `proyecto`.`Alumno` (`alumno_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `prof-permiso_id`
+  CONSTRAINT `curso_prof-permiso_id`
     FOREIGN KEY (`prof-permiso_id`)
     REFERENCES `proyecto`.`Prof-permiso` (`prof-permiso_id`)
     ON DELETE CASCADE
@@ -185,17 +182,17 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Enseñanza` (
   INDEX `precio_id_idx` (`precio_id` ASC),
   INDEX `curso_id_idx` (`curso_id` ASC),
   PRIMARY KEY (`enseñanza_id`),
-  CONSTRAINT `curso_id`
+  CONSTRAINT `enseñanza_curso_id`
     FOREIGN KEY (`curso_id`)
     REFERENCES `proyecto`.`Curso` (`curso_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `destreza_id`
+  CONSTRAINT `enseñanza_destreza_id`
     FOREIGN KEY (`destreza_id`)
     REFERENCES `proyecto`.`Destreza` (`destreza_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `precio_id`
+  CONSTRAINT `enseñanza_precio_id`
     FOREIGN KEY (`precio_id`)
     REFERENCES `proyecto`.`Precio` (`precio_id`)
     ON DELETE CASCADE
@@ -216,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Clase` (
   PRIMARY KEY (`clase_id`),
   UNIQUE INDEX `clase_id_UNIQUE` (`clase_id` ASC),
   INDEX `enseñanza_id_idx` (`enseñanza_id` ASC),
-  CONSTRAINT `enseñanza_id`
+  CONSTRAINT `clase_enseñanza_id`
     FOREIGN KEY (`enseñanza_id`)
     REFERENCES `proyecto`.`Enseñanza` (`enseñanza_id`)
     ON DELETE CASCADE
@@ -237,14 +234,54 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Pago` (
   PRIMARY KEY (`pago_id`),
   UNIQUE INDEX `pago_id_UNIQUE` (`pago_id` ASC),
   INDEX `clase_id_idx` (`clase_id` ASC),
-  CONSTRAINT `clase_id`
+  CONSTRAINT `pago_clase_id`
     FOREIGN KEY (`clase_id`)
     REFERENCES `proyecto`.`Clase` (`clase_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `proyecto`.`Autoescuela`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `proyecto`.`Autoescuela` ;
 
+CREATE TABLE IF NOT EXISTS `proyecto`.`Autoescuela` (
+  `autoescuela_id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(255) NULL,
+  `razon_social` VARCHAR(128) NULL,
+  `n_centro` VARCHAR(128) NULL,
+  `seccion` VARCHAR(32) NULL,
+  `telefono` INT NULL,
+  `email` VARCHAR(255) NULL,
+  `direccion` VARCHAR(255) NULL,
+  `codigo_postal` INT NULL,
+  `localidad` VARCHAR(128) NULL,
+  `provincia` VARCHAR(45) NULL,
+  `CIF` INT NULL,
+  'IVA' INT NULL,
+
+  PRIMARY KEY (`autoescuela_id`))
+ENGINE = InnoDB;
+
+CREATE TABLE proyecto.Examen (
+    `examen_id` INT NOT NULL AUTO_INCREMENT,
+    `fecha_presentacion` DATE NULL,
+    `fecha_examen` DATE NULL,
+    `tipo` VARCHAR (255) NULL,
+    `curso_id` INT NULL,
+    `profesor_id` INT NULL,
+    `vehiculo_id` INT NULL,
+    `estado` VARCHAR (45) NULL,
+    PRIMARY KEY (`examen_id`)
+    CONSTRAINT `examen_curso_id`
+      FOREIGN KEY (`curso_id`)
+      REFERENCES `proyecto`.`Curso` (`curso_id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE)
+    ENGINE = InnoDB;
+
+    
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

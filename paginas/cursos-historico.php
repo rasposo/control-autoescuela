@@ -64,7 +64,7 @@ require_once 'head_side.html';
                                 <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Alumno</th><th>Curso</th><th>Fecha inicio</th><th>Fecha fin</th>
+                                            <th>Alumno</th><th>Seccion</th><th>Curso</th><th>Fecha inicio</th><th>Fecha fin</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_tabla">

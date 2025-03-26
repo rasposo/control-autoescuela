@@ -15,8 +15,6 @@ require_once '../scripts/claseAlumno.php';
 require_once 'header.html';
 require_once 'head_side.html';
 
-$cursos = searchCursoInCurse($pdo);
-
 ?>
 
                 <!-- Begin Page Content -->
@@ -29,6 +27,28 @@ $cursos = searchCursoInCurse($pdo);
                     <hr class="sidebar-divider my-0">
                     <br>
 
+                    <div class="container-fluid">
+                        <form action="#" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                 <input type="text" class="form-control bg-gradient-light border-1 small" placeholder="Buscar por alumno..."
+                                                aria-label="Search" aria-describedby="basic-addon2" id="curso-find" >
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" onclick="llamarAPIbuscarCurso()">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <a href="cursos-historico.php" class="btn btn-primary btn-icon-split" style="margin-left: 20px">
+                                <span class="text">Histórico cursos</span>
+                            </a>
+                    </div>
+                    <br>
+
+                    <!-- Divider -->
+                     <hr class="sidebar-divider my-0">
+                    <br>
+
                     <!-- Tabla de resultados-->
                     <div class="card shadow mb-4" id='tabla_profes'>
                         <div class="card-header py-3">
@@ -39,29 +59,21 @@ $cursos = searchCursoInCurse($pdo);
                                 <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Curso</th><th>Alumno</th><th>Profesor</th>
+                                        <th>Seccion</th><th>Curso</th><th>Alumno</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_tabla">
-                                    <?php
-                                    //hacemos el cuadro de cursos
-                                    foreach ( $cursos as $curso ) {
-                                        $profe = loadProfeById( $pdo, $curso->getProfesorId() );
-                                        $alu = loadAlumById( $pdo, $curso->getAlumnoId() );
-                                        $stmt = $pdo->prepare('SELECT tipo FROM Permiso WHERE permiso_id = :id' );
-                                        $stmt->execute(array( ':id' => $curso->getPermisoId() ));
-                                        $permiso = $stmt->fetch(PDO::FETCH_ASSOC);
-                                        echo "<tr><td><a href=\"curso.php?curso_id=".$curso->getID()."\">".$permiso['tipo'] ."</td>";
-                                        echo "<td><a href=\"alumno.php?alumno_id=".$curso->getAlumnoId()."\">".$alu['nombre']." ".$alu['apellido1']." ".$alu['apellido2']."</a></td>";
-                                        echo "<td><a href=\"profesor.php?profesor_id=".$curso->getProfesorId()."\">".$profe['nombre']." ".$profe['apellido1']." ".$profe['apellido2']."</a></td></tr>";
-                                    }
-                                    ?>
+
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="cursos-historico.php" class="btn btn-primary btn-icon-split">
-                                <span class="text">Histórico cursos</span>
-                            </a>
                         </div>
 
 <?php require_once 'footer.html';?>
+
+<script>
+    $("#curso-find").autocomplete({
+        source: "../scripts/autocompletarAlumnos.php",
+        minLength: 2
+    });
+</script>

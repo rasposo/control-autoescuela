@@ -34,8 +34,8 @@ require_once 'head_side.html';
                                     </button>
                                 </div>
                             </div>
-                    </form>
-                    <a href="nuevoProfesor.php?profesor_id=0" class="btn btn-primary btn-icon-split" style="margin-left: 20px">
+                        </form>
+                        <a href="nuevoProfesor.php?profesor_id=0" class="btn btn-primary btn-icon-split" style="margin-left: 20px">
                             <span class="text">Nuevo profesor</span>
                         </a>
                     </div>
@@ -43,25 +43,30 @@ require_once 'head_side.html';
 
                     <hr class="sidebar-divider my-0">
                     <br>
-                </div>
 
-                <!-- Tabla de resultados-->
-                <div class="card shadow mb-4" id='tabla_profes'>
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Resultado búsqueda</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="cuerpo_tabla">
-                                    </tbody>
-                                </table>
+                    <!-- Tabla de resultados-->
+                    <div class="card shadow mb-4" id='tabla_profes'>
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Resultado búsqueda</h6>
                             </div>
-                        </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="80%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cuerpo_tabla">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
 <?php require_once 'footer.html';?>
+
+<script>
+    $("#prof-name-find").autocomplete({
+        source: "../scripts/autocompletarProf.php"
+    });
+</script>

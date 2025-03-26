@@ -18,6 +18,7 @@ $stmt->execute(array( ':ini' => $inicio,
                       ':fin' => $final 
                     ));
 while ($i = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+  if ($i['finalizado'] == 1) {
     $alumno = new Alumno($i['alumno_id']);
     $alumno->loadFromDB($pdo);
     $i['alumno_id'] = $alumno->getId();
@@ -25,8 +26,10 @@ while ($i = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     $i['apellido1_alumno'] = $alumno->getApellido1();
     $i['apellido2_alumno'] = $alumno->getApellido2();
     $permiso = loadPermisoById($pdo, $i['permiso_id']);
-    $i['permiso'] = $permiso[0]['tipo'];
-    $cursos[] = $i;
+    $i['permiso'] = $permiso['tipo'];
+    //añadimos el curso al array por el principio, para que se ordenen desde el más nuevo
+    array_unshift($cursos, $i);
+  };
 }
 
 echo (json_encode($cursos, JSON_PRETTY_PRINT));

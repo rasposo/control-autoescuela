@@ -186,5 +186,5 @@ class Alumno{
 		}
 		return $lista;
     }
-} // fin de la clase 
-?>
+} 
+// fin de la clase 

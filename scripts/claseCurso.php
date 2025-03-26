@@ -3,32 +3,27 @@ require_once 'funciones.php';
 
 class Curso{
 
-	private $curso_id, $alumno_id, $profesor_id, $permiso_id, $fecha_inicio, 
-            $fecha_examen_teorico, $fecha_examen_destreza, $fecha_examen_circulacion, $finalizado,
-            $fecha_finalizacion, $pagado;
+	private $curso_id, $seccion, $numero_curso, $alumno_id, $permiso_id, $fecha_inicio, 
+            $finalizado, $fecha_finalizacion, $pagado;
 
 	// getters
 	public function __construct($value = 0)     {  $this->curso_id = $value;   }
 	public function getId()                     { return $this->curso_id; }
-	public function getAlumnoId()              { return $this->alumno_id; 	}
-    public function getProfesorId()            { return $this->profesor_id; }
+    public function getSeccion()                { return $this->seccion; }
+    public function getNumeroCurso()            { return $this->numero_curso; }
+	public function getAlumnoId()               { return $this->alumno_id; 	}
     public function getPermisoId()              { return $this->permiso_id; }
     public function getFechaInicio()            { return $this->fecha_inicio; }
-    public function getFechaExamenTeorico()     { return $this->fecha_examen_teorico; }
-    public function getFechaExamenDestreza()    { return $this->fecha_examen_destreza; }
-	public function getFechaExamenCirculacion() { return $this->fecha_examen_circulacion; }
     public function getFinalizado()             { return $this->finalizado; }
     public function getFechaFinalizacion()      { return $this->fecha_finalizacion; }
 	public function getPagado()                 { return $this->pagado; }
 	
 	// setters
+    public function setSeccion($value)                { $this->seccion = $value; }
+    public function setNumeroCurso($value)            { $this->numero_curso = $value; }
 	public function setAlumnoId($value)               { $this->alumno_id = $value; }
-    public function setProfesorId($value)            { $this->profesor_id = $value; }
     public function setPermisoId($value)              { $this->permiso_id = $value; }
     public function setFechaInicio($value)            { $this->fecha_inicio = $value; }
-    public function setFechaExamenTeorico($value)     { $this->fecha_examen_teorico = $value; }
-    public function setFechaExamenDestreza($value)    { $this->fecha_examen_destreza = $value; }
-	public function setFechaExamenCirculacion($value) { $this->fecha_examen_circulacion = $value; }
 	public function setFinalizado($value)             { $this->finalizado = $value; }
     public function setFechaFinalizacion($value)      { $this->fecha_finalizacion = $value; }
     public function setPagado($value)                 { $this->pagado = $value; }
@@ -41,13 +36,11 @@ class Curso{
       }
 	
 	public function loadFromDBRecord ($registro) {
+        $this->seccion                  = $registro["seccion"];
+        $this->numero_curso             = $registro["numero_curso"];
 		$this->alumno_id                = $registro["alumno_id"];
-        $this->profesor_id              = $registro["profesor_id"];
         $this->permiso_id               = $registro["permiso_id"];
         $this->fecha_inicio             = $registro["fecha_inicio"];
-        $this->fecha_examen_teorico     = $registro['fecha_examen_teorico'];
-        $this->fecha_examen_destreza    = $registro["fecha_examen_destreza"];
-        $this->fecha_examen_circulacion = $registro["fecha_examen_circulacion"];
         $this->finalizado               = $registro["finalizado"];
 		$this->fecha_finalizacion       = $registro["fecha_finalizacion"];
 		$this->pagado                   = $registro["pagado"];
@@ -66,26 +59,22 @@ class Curso{
 		// Compruebo si el caso ya existe
 		if ($this->existsInDB($pdo)) {
 		    // Si existe, actualizo
-            $stmt = $pdo->prepare('UPDATE curso SET alumno_id                = :aid,
-                                                    profesor_id              = :pid,
+            $stmt = $pdo->prepare('UPDATE curso SET seccion                  = :sec,
+                                                    numero_curso             = :ncu,
+                                                    alumno_id                = :aid,
                                                     permiso_id               = :rid,
                                                     fecha_inicio             = :fic,
-                                                    fecha_examen_teorico     = :fet,
-                                                    fecha_examen_destreza    = :fed,
-                                                    fecha_examen_circulacion = :fec,
                                                     finalizado               = :fin,
                                                     fecha_finalizacion       = :ffi,
                                                     pagado                   = :pag
                                     WHERE curso_id = :cid');
             $stmt->execute(array(
+                ':sec' => $this->seccion,
+                ':ncu' => $this->numero_curso,
                 ':cid' => $this->curso_id,
                 ':aid' => $this->alumno_id,
-                ':pid' => $this->profesor_id,
                 ':rid' => $this->permiso_id,
                 ':fic' => $this->fecha_inicio,
-                ':fet' => $this->fecha_examen_teorico,
-                ':fed' => $this->fecha_examen_destreza,
-                ':fec' => $this->fecha_examen_circulacion,
                 ':fin' => $this->finalizado,
                 ':ffi' => $this->fecha_finalizacion,
                 ':pag' => $this->pagado
@@ -93,26 +82,40 @@ class Curso{
             );
 		} else {
 			// Si no existe, inserto
-            $stmt = $pdo->prepare('INSERT INTO curso (alumno_id,
-                                                        profesor_id,
+
+            //preparo el número de curso
+            //filtramos para solo dar número a los permisos, no al resto de cursos
+            if ( $this->permiso_id < 16 ) {
+                $fecha = getDate();
+                $año = $fecha['year']."/";
+                //obtenemos el número de cursos en el año
+                $stmt = $pdo->prepare('SELECT count(*) FROM Curso WHERE numero_curso LIKE :id AND seccion = :sec');
+                $stmt ->execute(array( ':id' => $año."%",
+                                    ':sec' => $this->seccion
+                                    ));
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                //componemos el número de curso y le damos el valor a la variable + 1
+                $this->numero_curso = $año.$result['count(*)'];
+            } else {
+                $this->numero_curso = "";
+            }
+
+            $stmt = $pdo->prepare('INSERT INTO curso (  seccion,
+                                                        numero_curso,
+                                                        alumno_id,
                                                         permiso_id,
                                                         fecha_inicio,
-                                                        fecha_examen_teorico,
-                                                        fecha_examen_destreza,
-                                                        fecha_examen_circulacion,
                                                         finalizado,
                                                         fecha_finalizacion,
                                                         pagado)
-                                    VALUES (:aid, :pid, :rid, :fic, :fet, :fed, :fec, :fin, :ffi, :pag)'
+                                    VALUES (:sec, :ncu, :aid, :rid, :fic, :fin, :ffi, :pag)'
                                     );
             $stmt->execute(array(
+                ':sec' => $this->seccion,
+                ':ncu' => $this->numero_curso,
                 ':aid' => $this->alumno_id,
-                ':pid' => $this->profesor_id,
                 ':rid' => $this->permiso_id,
                 ':fic' => $this->fecha_inicio,
-                ':fet' => $this->fecha_examen_teorico,
-                ':fed' => $this->fecha_examen_destreza,
-                ':fec' => $this->fecha_examen_circulacion,
                 ':fin' => $this->finalizado,
                 ':ffi' => $this->fecha_finalizacion,
                 ':pag' => $this->pagado
