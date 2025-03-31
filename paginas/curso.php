@@ -170,7 +170,7 @@ require_once 'head_side.html';
                         <div class="row">
 
                             <!-- tabla de clases -->
-                            <div class="col-lg-6 mb-1">
+                            <div class="col-lg-12 mb-1">
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">Clases</h6>
@@ -232,7 +232,9 @@ require_once 'head_side.html';
                                         </a>
                                     </div>
                                 </div>
+                            </div>
                                 <!-- tabla de examenes -->
+                            <div class="col-lg-6 mb-4">
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">Examenes</h6>
@@ -325,8 +327,11 @@ require_once 'head_side.html';
                                         </a>
                                     </div>
                                 </div>
+                            </div>
+
                             
                                 <!-- tabla de pagos -->
+                            <div class="col-lg-12 mb-4">
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">Pagos</h6>
@@ -349,7 +354,7 @@ require_once 'head_side.html';
                                                             $pag->loadFromDB($pdo);
 
                                                             //filtramos los pagos anulados
-                                                            if ( $pag->getAnulado() !== "1" ) {
+                                                            if ( $pag->getAnulado() != "1" ) {
 
                                                                 //añadimos importe del pago al total pagado
                                                                 $total_pagado += $pag->getImporte();
