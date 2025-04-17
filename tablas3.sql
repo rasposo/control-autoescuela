@@ -142,6 +142,27 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Curso` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `proyecto`.`Curso-profesor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `proyecto`.`Curso-profesor` ;
+
+CREATE TABLE IF NOT EXISTS `proyecto`.`Curso` (
+  `curso_id` INT NOT NULL,
+  `profesor_id` INT NOT NULL,
+  PRIMARY KEY (`curso_id`, `profesor_id`),
+  CONSTRAINT `curso-prof_curso_id`
+    FOREIGN KEY (`curso_id`)
+    REFERENCES `proyecto`.`Curso` (`curso_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `curso_prof-curso_id`
+    FOREIGN KEY (`profesor_id`)
+    REFERENCES `proyecto`.`Profesor` (`profesor_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `proyecto`.`Destreza`
@@ -213,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `proyecto`.`Clase` (
   PRIMARY KEY (`clase_id`),
   UNIQUE INDEX `clase_id_UNIQUE` (`clase_id` ASC),
   INDEX `enseñanza_id_idx` (`enseñanza_id` ASC),
-  CONSTRAINT `clase_enseñanza_id`
+  CONSTRAINT `enseñanza_id`
     FOREIGN KEY (`enseñanza_id`)
     REFERENCES `proyecto`.`Enseñanza` (`enseñanza_id`)
     ON DELETE CASCADE
