@@ -267,7 +267,7 @@ require_once 'head_side.html';
                                                             }
                                   
                                                             echo('<tr><td>'.$relacion['tipo_prueba'].'</td>
-                                                            <td><a href="examen.php?relacion_id='.$relacion['relacion_id'].'">'.$relacion['fecha_examen'].'</a></td>
+                                                            <td><a href="examen.php?relacion_id='.$relacion['relacion_id'].'">'.date("d/m/Y", strtotime($relacion['fecha_examen'])).'</a></td>
                                                             <td>'.$pro_name.'</td>
                                                             <td><span '. $estilo.'>'.$examen['estado'].'</span></td></tr>');
                                                         }

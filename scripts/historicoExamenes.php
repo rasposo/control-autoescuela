@@ -23,6 +23,8 @@ while ($i = $stmt->fetch(PDO::FETCH_ASSOC) ) {
     $profesor->loadFromDB($pdo);
     $nombre_profesor = $profesor->getNombre()." ".$profesor->getApellido1()." ".$profesor->getapellido2();
     $i['profesor'] = $nombre_profesor;
+    //cambiamos el formato de la fecha
+    $i['fecha_examen'] = date("d/m/Y", strtotime($i['fecha_examen']));
     
     //añadimos el examen al array por el principio, para que se ordenen desde el más nuevo
     array_unshift($examenes, $i);

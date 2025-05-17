@@ -51,14 +51,21 @@ foreach ( $profesores as $profesor ) {
                         </div>                    
                         <div class="form-group row">
                             <div class="col-sm-4">Profesor:
-                                <input type="text" class="form-control form-control-user" id="profesor"
-                                    placeholder="Profesor">
+                                <select class="form-select form-control" id="profesor" name="profesor">
+                                    <option value="" selected>Selecciona un profesor</option>
+                                    <?php foreach ($lista_profes as $profesor) { ?>
+                                        <option value="<?php echo $profesor; ?>"><?php echo $profesor; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div> 
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-4">Tipo de prueba:
-                                <input type="text" class="form-control form-control-user" id="tipo-prueba"
-                                    placeholder="Tipo de prueba">
+                                <select class="form-select form-control" id="tipo-prueba" name="tipo-prueba">
+                                    <option value="Teórico" selected>Teórico</option>
+                                    <option value="Circuito cerrado">Circuito cerrado</option>
+                                    <option value="Circulación">Circulación</option>
+                                </select>
                             </div>
                         </div>
                      </form>
@@ -92,8 +99,8 @@ $("#profesor").autocomplete({
 });
 
 const tipo_examen = ['Circulación', 'Circuito cerrado', 'Teórico'];
-$("#tipo-prueba").autocomplete({
+ /*$("#tipo-prueba").autocomplete({
     minLength: 0,
     source: tipo_examen
-});
+}); */
 </script>
