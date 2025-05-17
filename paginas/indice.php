@@ -24,8 +24,7 @@ require_once 'head_side.html';
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Panel de administración</h1>
 
-                    <div class="row">
-
+                    <div class="row justify-content-around">
                         <!-- Alumnos Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-bottom-dark shadow h-100 py-2">
@@ -58,7 +57,7 @@ require_once 'head_side.html';
                             </div>
                         </div>
 
-                        <!-- Cursos Card -->
+                        <!-- Pagos Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-bottom-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -73,7 +72,9 @@ require_once 'head_side.html';
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="row justify-content-around">
                         <!-- Cursos Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-bottom-info shadow h-100 py-2">
@@ -89,7 +90,7 @@ require_once 'head_side.html';
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!-- Examenes Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-bottom-warning shadow h-100 py-2">
@@ -106,7 +107,7 @@ require_once 'head_side.html';
                             </div>
                         </div>
 
-                        <!-- Informes Card -->
+                        <!-- Informes Card 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-bottom-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -120,7 +121,7 @@ require_once 'head_side.html';
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- Configuración Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -138,6 +139,8 @@ require_once 'head_side.html';
                             </div>
                         </div>
                     </div>
+                </div>
+            
 
 <?php require_once 'footer.html'; ?>
 

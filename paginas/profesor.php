@@ -223,7 +223,7 @@ $permisos = loadAllPermisos($pdo);
                                 <legend>Perfiles:</legend>
                                 <div>
                                     <input type="checkbox" name="perfiles[]" value="administrador" <?php echo $admin; ?>>
-                                    <label for="perfil_administrador">Administrador</label>
+                                    <label for="perfil_administrador">Profesor</label>
                                 </div>
                                 <div>
                                     <input type="checkbox" name="perfiles[]" value="director" <?php echo $direct; ?>>
