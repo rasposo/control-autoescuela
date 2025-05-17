@@ -14,6 +14,7 @@ $autoescuelas = loadAllDatosAutoescuela($pdo);
 $permisos = loadAllPermisos($pdo);
 $enseñanzas = loadAllEnseñanzas($pdo);
 $vehiculos = loadAllVehiculos($pdo);
+$tasas = loadAllTasas($pdo);
 
 require_once 'header.html';
 require_once 'head_side.html';
@@ -119,6 +120,45 @@ require_once 'head_side.html';
 
     <hr class="sidebar-divider my-0">
     <br>
+
+    <!-- Tasas -->
+    <div class="container-fluid">
+        <h2 class="h4 mb-4 text-gray-600">Tasas</h2>
+        <div class="row">    
+            <div class="col-lg-8 mb-6">
+                <div class="card shadow mb-8">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tr><th>Tipo:</th><th>Precio</th></tr>
+                            <?php
+                                //recopilamos las tasas
+                                foreach ( $tasas as $tasa ) {
+                                    echo('<tr><td>'.$tasa['tipo'].'</td>
+                                    <td>'.$tasa['precio'].'</td>
+                                    <td><a href="#" class="abrirModal" onclick="identificarTasa('.$tasa['tasa_id'].')" data-toggle="modal" 
+                                    data-target="#eliminarTasa">Eliminar</a></td></th>');
+                                };
+                                ?>
+                        </table>
+
+                        <input type="button" id="añadir_tasa" value="Añadir" 
+                            class="btn btn-primary btn-icon-split" onclick="añadirTasa()">
+                        <div  style="display: none" id="nueva_tasa"><br>
+                            Tipo <input type="text" id="tipo_tasa" class="form-control col-md-6" >
+                            Precio <input type="text" id="precio" class="form-control col-md-6">
+                            <br>
+                            <input type="button" id="nueva_tasa" value="añadir" 
+                            class="btn btn-secondary btn-icon-split" onclick="nuevaTasa()">
+                        </div>
+                    </div>                     
+                </div>
+            </div>
+        </div>                       
+    </div>
+    <br>
+
+    <hr class="sidebar-divider my-0">
+    <br>  
 
     <!-- Configuración de permisos -->
     <div class="container-fluid" id="enseñanzas">
@@ -277,6 +317,24 @@ require_once 'head_side.html';
     </div>
 </div>
 
+<!-- modal eliminar Tasa-->
+<div class="modal fade" id="eliminarTasa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quieres eliminar esta tasa?</h5>
+            </div>
+            <div class="modal-body">Esta acción no se puede deshacer. Selecciona "Eliminar" si deseas hacerlo.</div>
+                <input type="hidden" name="idTasa" id="idTasa" value="">
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Salir sin eliminar</button>
+                <a class="btn btn-primary" href="#" onclick="eliminarTasa()">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function añadir(permiso_id) {
         $('#div-ense-'+permiso_id).toggle();
@@ -298,9 +356,24 @@ require_once 'head_side.html';
         };
     }
 
+    function añadirTasa() {
+        $('#nueva_tasa').toggle();
+        let boton = document.getElementById("añadir_tasa").value;
+        if ( boton == "Añadir" ) {
+            document.getElementById("añadir_tasa").value = "Cancelar";
+        } else {
+            document.getElementById("añadir_tasa").value = "Añadir";
+        };
+    }
+
     //función para pasar datos del vehículo a eliminar, al modal.
     function identificarVehiculo($vehiculo) {
         document.getElementById('idVehiculo').value = $vehiculo;
+    }
+
+    //función para pasar datos de la tasa  a eliminar, al modal.
+    function identificarTasa($tasa) {
+        document.getElementById('idTasa').value = $tasa;
     }
 </script>
 

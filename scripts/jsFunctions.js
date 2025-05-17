@@ -1215,7 +1215,70 @@ function eliminarVehiculo() {
     xhr.send(fd);
 }
 
+//funciones de tasas
+function nuevaTasa() {
 
+    //recuperamos elementos a actualizar
+    let tipo =      document.getElementById("tipo_tasa").value;
+    let precio =     document.getElementById("precio").value;
+
+    //formulario JS
+    let fd = new FormData();
+    fd.append('tipo', tipo);
+    fd.append('precio', precio);
+
+
+    // Llamada HTTP
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../scripts/añadirTasa.php");
+    xhr.onreadystatechange = function() {
+        
+        //el status 200 y 4 significa q se ha ejecutado
+        if (xhr.readyState == 4 && xhr.status == 200) {	
+            // recupero la respuesta del API
+            var string = xhr.response;
+            var obj = JSON.parse(string);
+            if (obj["id"] == 0) {
+                alert ("Tasa creada");
+                window.location.href = "configuracion.php";
+            } else {
+                alert (obj["texto"]);
+            }
+        }
+    }
+    xhr.send(fd);
+}
+
+function eliminarTasa() {
+    //recuperamos elementos a actualizar
+    let id = document.getElementById("idTasa").value;
+
+
+    //formulario JS
+    let fd = new FormData();
+    fd.append('id', id);
+
+
+    // Llamada HTTP
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../scripts/eliminarTasa.php");
+    xhr.onreadystatechange = function() {
+        
+        //el status 200 y 4 significa q se ha ejecutado
+        if (xhr.readyState == 4 && xhr.status == 200) {	
+            // recupero la respuesta del API
+            var string = xhr.response;
+            var obj = JSON.parse(string);
+            if (obj["id"] == 0) {
+                alert ("Tasa eliminada");
+                window.location.href = "configuracion.php";
+            } else {
+                alert (obj["texto"]);
+            }
+        }
+    }
+    xhr.send(fd);
+}
 
 //funciones de examenes
 
