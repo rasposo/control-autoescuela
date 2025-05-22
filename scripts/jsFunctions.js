@@ -34,20 +34,76 @@ function llamarAPIguardarProfesor() {
     //recuperamos elementos a actualizar
     let profesor_id =           document.getElementById("profesor_id").value;
     let nombre =                document.getElementById("nombre").value;
+    if ( nombre.length < 2 ) {
+        alert ("Por favor, introduzca un nombre");
+        return;
+    }
     let apellido1 =             document.getElementById("apellido1").value;
     let apellido2=              document.getElementById("apellido2").value;
+    if ( apellido1.length < 2 || apellido2.length < 2 ) {
+        alert ("Por favor, introduzca dos apellidos");
+        return;
+    }
     let DNI=                    document.getElementById("DNI").value;
+    if ( DNI.length < 9 ) {
+        alert ("Por favor, introduzca un DNI correcto");
+        return;
+    }
     let caducidad_dni =         document.getElementById("caducidad_dni").value;
+    if ( caducidad_dni.length < 7 ) {
+        alert ("Por favor, introduzca una fecha de caducidad correcta");
+        return;
+    }
     let telefono =              document.getElementById("telefono").value;
+    if ( telefono.length < 9 || telefono.length > 12 ) {
+        alert ("Por favor, introduzca un teléfono correcto");
+        return;
+    }
     let email =                 document.getElementById("email").value;
+    if ( email.length < 5 ) {
+        alert ("Por favor, introduzca un email correcto");
+        return;
+    }
     let direccion =             document.getElementById("direccion").value;
+    if ( direccion.length < 5 ) {
+        alert ("Por favor, introduzca una dirección correcta");
+        return;
+    }
     let codigo_postal =         document.getElementById("codigo_postal").value;
+    if ( codigo_postal.length < 5 ) {
+        alert ("Por favor, introduzca un código postal correcto");
+        return;
+    }
     let localidad =             document.getElementById("localidad").value;
+    if ( localidad.length < 5 ) {
+        alert ("Por favor, introduzca una localidad correcta");
+        return;
+    }
     let provincia =             document.getElementById("provincia").value;
+    if ( provincia.length < 5 ) {
+        alert ("Por favor, introduzca una provincia correcta");
+        return;
+    }
     let fecha_nacimiento =      document.getElementById("fecha_nacimiento").value;
+    if ( fecha_nacimiento.length < 7 ) {
+        alert ("Por favor, introduzca una fecha de nacimiento correcta");
+        return;
+    }
     let fecha_ingreso =         document.getElementById("fecha_ingreso").value;
+    if ( fecha_ingreso.length < 7 ) {
+        alert ("Por favor, introduzca una fecha de ingreso correcta");
+        return;
+    }
     let numero_ss =             document.getElementById("numero_ss").value;
+    if ( numero_ss.length < 7 ) {
+        alert ("Por favor, introduzca un número de seguridad social correcto");
+        return;
+    }
     let contraseña =            document.getElementById("contraseña").value;
+    if ( contraseña.length < 5 ) {
+        alert ("Por favor, introduzca una contraseña correcta");
+        return;
+    }
 
     //cargamos los perfiles
     let perfiles = [];
@@ -265,21 +321,81 @@ function llamarAPIguardarAlumno() {
     //recuperamos elementos a actualizar
     let alumno_id =             document.getElementById("alumno_id").value;
     let nombre =                document.getElementById("nombre").value;
+    if ( nombre.length < 2 ) {
+        alert ("Por favor, introduzca un nombre");
+        return; 
+    }
     let apellido1 =             document.getElementById("apellido1").value;
     let apellido2=              document.getElementById("apellido2").value;
+    if ( apellido1.length < 2 || apellido2.length < 2 ) {
+        alert ("Por favor, introduzca dos apellidos");
+        return;
+    }
     let dni=                    document.getElementById("dni").value;
+    if ( dni.length < 9 ) {
+        alert ("Por favor, introduzca un DNI correcto");
+        return;
+    }
     let caducidad_dni =         document.getElementById("caducidad_dni").value;
+    if ( caducidad_dni.length < 7 ) {
+        alert ("Por favor, introduzca una fecha de caducidad correcta");
+        return;
+    }
     let telefono =              document.getElementById("telefono").value;
+    if ( telefono.length < 9 || telefono.length > 12 ) {
+        alert ("Por favor, introduzca un teléfono correcto");
+        return;
+    }
     let email =                 document.getElementById("email").value;
+    if ( email.length < 5 ) {
+        alert ("Por favor, introduzca un email correcto");
+        return;
+    }
     let direccion =             document.getElementById("direccion").value;
+    if ( direccion.length < 5 ) {
+        alert ("Por favor, introduzca una dirección correcta");
+        return;
+    }
     let codigo_postal =         document.getElementById("codigo_postal").value;
+    if ( codigo_postal.length < 5 ) {
+        alert ("Por favor, introduzca un código postal correcto");
+        return;
+    }
     let localidad =             document.getElementById("localidad").value;
+    if ( localidad.length < 5 ) {
+        alert ("Por favor, introduzca una localidad correcta");
+        return;
+    }
     let provincia =             document.getElementById("provincia").value;
+    if ( provincia.length < 5 ) {
+        alert ("Por favor, introduzca una provincia correcta");
+        return;
+    }
     let nacionalidad =          document.getElementById("nacionalidad").value;
+    if ( nacionalidad.length < 5 ) {
+        alert ("Por favor, introduzca una nacionalidad correcta");
+        return;
+    }
     let fecha_nacimiento =      document.getElementById("fecha_nacimiento").value;
+    if ( fecha_nacimiento.length < 7 ) {
+        alert ("Por favor, introduzca una fecha de nacimiento correcta");
+        return;
+    }
     let fecha_ingreso =         document.getElementById("fecha_ingreso").value;
+    if ( fecha_ingreso.length < 7 ) {
+        alert ("Por favor, introduzca una fecha de ingreso correcta");
+        return;
+    }
     let estudios =              document.getElementById("estudios").value;
+    if ( estudios.length < 5 ) {
+        alert ("Por favor, introduzca unos estudios correctos");
+        return;
+    }
     let contraseña =            document.getElementById("contraseña").value;
+    if ( contraseña.length < 5 ) {
+        alert ("Por favor, introduzca una contraseña correcta");
+        return;
+    }
 
     //formulario JS
     let fd = new FormData();
@@ -503,6 +619,7 @@ function cambiarProfesor() {
     //recupero el id del curso
 
     const curso_id = document.getElementById("curso_id").value;
+
 
     //formulario JS
     let fd = new FormData();
@@ -1096,18 +1213,70 @@ function llamarAPIguardarAutoescuela() {
     //recuperamos elementos a actualizar
     let autoescuela_id =document.getElementById("autoescuela_id").value;
     let nombre =        document.getElementById("nombre").value;
+    if ( nombre.length < 5 ) {
+        alert ("Por favor, introduzca un nombre correcto");
+        return;
+    }
     let razonSocial =   document.getElementById("razon-social").value;
+    if ( razonSocial.length < 5 ) {
+        alert ("Por favor, introduzca una razón social correcta");
+        return;
+    }
     let numeroCentro=   document.getElementById("numero-centro").value;
+    if ( numeroCentro.length < 2 ) {
+        alert ("Por favor, introduzca un número de centro correcto");
+        return;
+    }
     let seccion=        document.getElementById("seccion").value;
+    if ( seccion.length < 2 ) {
+        alert ("Por favor, introduzca una sección correcta");
+        return;
+    }
     let dc=             document.getElementById("D.C.").value;
+    if ( dc.length < 1 ) {
+        alert ("Por favor, introduzca un D.C. correcto");
+        return;
+    }
     let telefono =      document.getElementById("telefono").value;
+    if ( telefono.length < 5 ) {
+        alert ("Por favor, introduzca un teléfono correcto");
+        return;
+    }
     let email =         document.getElementById("email").value;
+    if ( email.length < 5 ) {
+        alert ("Por favor, introduzca un email correcto");
+        return;
+    }
     let direccion =     document.getElementById("direccion").value;
+    if ( direccion.length < 5 ) {
+        alert ("Por favor, introduzca una dirección correcta");
+        return;
+    }
     let codigoPostal =  document.getElementById("codigo-postal").value;
+    if ( codigoPostal.length < 5 ) {
+        alert ("Por favor, introduzca un código postal correcto");
+        return;
+    }
     let localidad =     document.getElementById("localidad").value;
+    if ( localidad.length < 5 ) {
+        alert ("Por favor, introduzca una localidad correcta");
+        return;
+    }
     let provincia =     document.getElementById("provincia").value;
+    if ( provincia.length < 5 ) {
+        alert ("Por favor, introduzca una provincia correcta");
+        return;
+    }
     let CIF =           document.getElementById("CIF").value;
+    if ( CIF.length < 5 ) {
+        alert ("Por favor, introduzca un CIF correcto");
+        return;
+    }
     let IVA =           document.getElementById("IVA").value;
+    if ( IVA.length < 1 ) {
+        alert ("Por favor, introduzca un IVA correcto");
+        return;
+    }
 
     //formulario JS
     let fd = new FormData();
@@ -1289,6 +1458,10 @@ function llamarAPInuevaRelacionExamen() {
     let fechaPresentacion = document.getElementById("fecha-presentacion").value;
     let fechaExamen = document.getElementById("fecha-examen").value;
     const profesor = document.getElementById("profesor").value;
+    if ( profesor.length < 1 ) {
+        alert ("Por favor, introduzca un profesor");
+        return;
+    }
     const tipoPrueba = document.getElementById("tipo-prueba").value;
 
     if ( fechaPresentacion == "" || fechaExamen == "" ) {
@@ -1296,40 +1469,32 @@ function llamarAPInuevaRelacionExamen() {
         return;
     };
 
-    if ( profesor.length > 1 && tipoPrueba.length > 1 ) {
+    //formulario JS
+    let fd = new FormData();
+    fd.append( 'fechaPresentacion', fechaPresentacion );
+    fd.append( 'fechaExamen', fechaExamen );
+    fd.append( 'profesor', profesor );
+    fd.append( 'tipoPrueba', tipoPrueba );
 
-        //formulario JS
-        let fd = new FormData();
-        fd.append( 'fechaPresentacion', fechaPresentacion );
-        fd.append( 'fechaExamen', fechaExamen );
-        fd.append( 'profesor', profesor );
-        fd.append( 'tipoPrueba', tipoPrueba );
-
-        // Llamada HTTP
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "../scripts/nuevaRelacionExamen.php");
-        xhr.onreadystatechange = function() {
-                
-            //el status 200 y 4 significa q se ha ejecutado
-            if (xhr.readyState == 4 && xhr.status == 200) {	
-                // recupero la respuesta del API
-                var string = xhr.response;		
-                var obj = JSON.parse(string);
-                if (obj["id"] == 0) {  
-                    alert ("Relación de examen creado");
-                    window.location.href = "examen.php?relacion_id="+obj["relacion_id"];
-                } else {
-                    alert (obj["texto"]);
-                }
+    // Llamada HTTP
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "../scripts/nuevaRelacionExamen.php");
+    xhr.onreadystatechange = function() {
+            
+        //el status 200 y 4 significa q se ha ejecutado
+        if (xhr.readyState == 4 && xhr.status == 200) {	
+            // recupero la respuesta del API
+            var string = xhr.response;		
+            var obj = JSON.parse(string);
+            if (obj["id"] == 0) {  
+                alert ("Relación de examen creado");
+                window.location.href = "examen.php?relacion_id="+obj["relacion_id"];
+            } else {
+                alert (obj["texto"]);
             }
         }
-        xhr.send(fd);
-
-    } else {
-        alert('Por favor, introduzca un tipo de prueba y profesor válidos.');
-        window.location.href = "nuevo_examen.php";
-
-    };
+    }
+    xhr.send(fd);
 };
 
 function llamarAPIhistoricoExamenes() {

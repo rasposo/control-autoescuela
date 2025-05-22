@@ -37,11 +37,11 @@ $alumno = new Alumno($_GET['alumno_id']);
                         <div class="form-group row">
                             <div class="col-sm-4 mb-3 mb-sm-0">Nombre
                                 <input type="text" class="form-control form-control-user" id="nombre"
-                                    placeholder="Nombre">
+                                    placeholder="Nombre" required>
                            </div>
                             <div class="col-sm-4">Primer apellido:
                                 <input type="text" class="form-control form-control-user" id="apellido1"
-                                    placeholder="Apellido 1">
+                                    placeholder="Apellido 1" required>
                             </div>
                             <div class="col-sm-4">Segundo apellido:
                                 <input type="text" class="form-control form-control-user" id="apellido2"
@@ -49,9 +49,9 @@ $alumno = new Alumno($_GET['alumno_id']);
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-2 mb-3 mb-sm-0">DNI:
+                            <div class="col-sm-2 mb-3 mb-sm-0" >DNI:
                                 <input type="text" class="form-control form-control-user" id="dni"
-                                    placeholder="DNI">
+                                    placeholder="DNI" required>
                            </div>
                             <div class="col-sm-2">Caducidad DNI:
                                 <input type="date" class="form-control form-control-user" id="caducidad_dni"
@@ -59,7 +59,7 @@ $alumno = new Alumno($_GET['alumno_id']);
                             </div>
                             <div class="col-sm-2">Teléfono:
                                 <input type="text" class="form-control form-control-user" id="telefono"
-                                    placeholder="Teléfono">
+                                    placeholder="Teléfono" required>
                             </div>
                             <div class="col-sm-4">Correo electrónico:
                                 <input type="email" class="form-control form-control-user" id="email"
@@ -69,33 +69,33 @@ $alumno = new Alumno($_GET['alumno_id']);
                         <div class="form-group row">
                             <div class="col-sm-6">Dirección:
                                 <input type="text" class="form-control form-control-user" id="direccion"
-                                    placeholder="Dirección">
+                                    placeholder="Dirección" required>
                            </div>
                             <div class="col-sm-2">Código postal:
                                 <input type="text" class="form-control form-control-user" id="codigo_postal"
-                                    placeholder="Código Postal">
+                                    placeholder="Código Postal" required>
                             </div>
                             <div class="col-sm-4">Localidad:
                                 <input type="text" class="form-control form-control-user" id="localidad"
-                                    placeholder="Localidad">
+                                    placeholder="Localidad" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-3">Provincia:
                                 <input type="text" class="form-control form-control-user" id="provincia"
-                                    placeholder="Provincia">
+                                    placeholder="Provincia" required>
                             </div>
                             <div class="col-sm-2">Nacionalidad:
                                 <input type="text" class="form-control form-control-user" id="nacionalidad"
-                                    placeholder="Nacionalidad">
+                                    placeholder="Nacionalidad" required>
                             </div>
                             <div class="col-sm-2">Fecha nacimiento:
                                 <input type="date" class="form-control form-control-user" id="fecha_nacimiento"
-                                    placeholder="Fecha Nacimiento">
+                                    placeholder="Fecha Nacimiento" required>
                             </div>
                             <div class="col-sm-2">Fecha ingreso:
                                 <input type="date" class="form-control form-control-user" id="fecha_ingreso"
-                                    placeholder="Fecha Ingreso">
+                                    placeholder="Fecha Ingreso" required>
                             </div>
                         </div>                    
                         <div class="form-group row">
@@ -105,7 +105,7 @@ $alumno = new Alumno($_GET['alumno_id']);
                             </div> 
                             <div class="col-sm-2 mb-3 mb-sm-0">Contraseña:
                                 <input type="password" class="form-control form-control-user" id="contraseña"
-                                    placeholder="Establecer contraseña">
+                                    placeholder="Establecer contraseña" required>
                             </div>
                         </div>
                         <input type='hidden' id="alumno_id" value="<?php echo($_GET['alumno_id']) ?>">
