@@ -28,8 +28,8 @@ try {
 
     // PARTE 2. REALIZAR ACCIÓN
 
-    //Si no existe, $id es 1. Entonces, introducimos nueva autoescuela
-    if ($autoescuela_id == "1" ) {
+    //Si no existe, $id es 0. Entonces, introducimos nueva autoescuela
+    if ($autoescuela_id == "0" ) {
         $stmt = $pdo->prepare('INSERT INTO Autoescuela (nombre,
                                                         razon_social,
                                                         n_centro,

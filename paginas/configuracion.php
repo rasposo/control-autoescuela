@@ -71,7 +71,7 @@ require_once 'head_side.html';
                 };
                 ?>
         </div>
-        <a href="actualizarAutoescuela.php?autoescuela_id=1" class="btn btn-primary btn-icon-split">
+        <a href="actualizarAutoescuela.php?autoescuela_id=0" class="btn btn-primary btn-icon-split">
             <span class="text">Nueva sección</span>
         </a>
     </div>
