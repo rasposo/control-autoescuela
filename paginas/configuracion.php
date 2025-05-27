@@ -265,6 +265,7 @@ require_once 'head_side.html';
             </a>
     </div>
     <br>
+</div>
 
     
 <!-- Modal nuevo permiso-->

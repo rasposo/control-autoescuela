@@ -177,6 +177,7 @@ require_once 'head_side.html';
                             </div>
                         </div>
                     </div>
+                </div>
 
 <?php require_once 'footer.html';?>
 
