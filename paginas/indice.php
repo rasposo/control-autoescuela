@@ -19,7 +19,7 @@ require_once 'head_side.html';
 ?>
 
 <!-- Begin Page Content -->
-<div class="container-fluid" style="background-image: url('../img/Logo_control_sin_fondo_difuminado.png'); background-repeat: no-repeat; background-position: center;">
+<div class="container-fluid" style="background-image: url('../img/logo_difu_sin.png'); background-repeat: no-repeat; background-position: center;">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Panel de administración</h1>
@@ -27,7 +27,7 @@ require_once 'head_side.html';
     <div class="row justify-content-around py-5">
         <!-- Alumnos Card -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-bottom-dark shadow h-100 py-2">
+            <div class="card border-bottom-dark shadow-lg h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -43,7 +43,7 @@ require_once 'head_side.html';
 
         <!-- Profesores Card -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-bottom-secondary shadow h-100 py-2">
+            <div class="card border-bottom-secondary shadow-lg h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -59,7 +59,7 @@ require_once 'head_side.html';
 
         <!-- Pagos Card -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-bottom-success shadow h-100 py-2">
+            <div class="card border-bottom-success shadow-lg h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -77,7 +77,7 @@ require_once 'head_side.html';
     <div class="row justify-content-around pt-4 pb-5">
         <!-- Cursos Card -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-bottom-info shadow h-100 py-2">
+            <div class="card border-bottom-info shadow-lg h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -93,7 +93,7 @@ require_once 'head_side.html';
         
         <!-- Examenes Card -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-bottom-warning shadow h-100 py-2">
+            <div class="card border-bottom-warning shadow-lg h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
@@ -109,7 +109,7 @@ require_once 'head_side.html';
 
         <!-- Configuración Card -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-bottom-warning shadow h-100 py-2">
+            <div class="card border-bottom-danger shadow-lg h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
