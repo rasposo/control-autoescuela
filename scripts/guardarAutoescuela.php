@@ -29,7 +29,7 @@ try {
     // PARTE 2. REALIZAR ACCIÓN
 
     //Si no existe, $id es 0. Entonces, introducimos nueva autoescuela
-    if ($autoescuela_id == "0" ) {
+    if ($autoescuela_id == 0 ) {
         $stmt = $pdo->prepare('INSERT INTO Autoescuela (nombre,
                                                         razon_social,
                                                         n_centro,
@@ -109,5 +109,4 @@ try {
     $error->texto = $e->getMessage();
     $json_error   = json_encode($error);
     echo ($json_error);
-}   
-?>
+}

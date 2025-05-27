@@ -35,11 +35,7 @@ require_once 'head_side.html';
         <h2 class="h4 mb-4 text-gray-600">Datos Autoescuela</h2>
         <div class="row">
             <?php
-            foreach ( $autoescuelas as $autoescuela ) {
-
-                if ( $autoescuela['autoescuela_id'] == "1" ) {
-                    continue;
-                }
+                foreach ( $autoescuelas as $autoescuela ) {
                     echo('<div class="col-lg-6 mb-4">');
                     echo('<div class="card shadow mb-6">');
                     //encabezado de la tarjeta
@@ -69,7 +65,7 @@ require_once 'head_side.html';
                     echo('</div>');
                     echo('</div>');                        
                 };
-                ?>
+            ?>
         </div>
         <a href="actualizarAutoescuela.php?autoescuela_id=0" class="btn btn-primary btn-icon-split">
             <span class="text">Nueva sección</span>

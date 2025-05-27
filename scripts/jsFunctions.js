@@ -1253,7 +1253,7 @@ function llamarAPIguardarAutoescuela() {
     let autoescuela_id =document.getElementById("autoescuela_id").value;
     let nombre =        document.getElementById("nombre").value;
     if ( nombre.length < 3 ) {
-        alert ("Por favor, introduzca un nombre correcto");
+        alert ("Por favor, introduzca un nombre válido (mínimo 3 letras)");
         return;
     }
     let razonSocial =   document.getElementById("razon-social").value;

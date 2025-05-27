@@ -8,8 +8,8 @@ if ( ! isset($_SESSION['name']) ) {
 }
 
 require_once '../scripts/funciones.php';
-//definimos campos
 
+//definimos campos
     $nombre =           "";
     $razon_social =     "";
     $n_centro =         "";
@@ -23,7 +23,7 @@ require_once '../scripts/funciones.php';
     $provincia =        "";
     $cif =              "";
     $iva =              "";
-    $autoescuela_id =   "";
+    $autoescuela_id =   0;
 
 //Cargamos datos si es una modificación
 if ($_GET['autoescuela_id'] != 0) {
@@ -42,9 +42,8 @@ if ($_GET['autoescuela_id'] != 0) {
     $provincia =        $datos_autoescuela['provincia'];
     $cif =              $datos_autoescuela['CIF'];
     $iva =              $datos_autoescuela['IVA'];
-    $autoescuela_id =   $datos_autoescuela['autoescuela_id'];
+    $autoescuela_id =   $_GET['autoescuela_id'];
 }
-$datos_autoescuela = loadAutoescuela($pdo, $_GET['autoescuela_id']);
 
 require_once 'header.html';
 require_once 'head_side.html';
