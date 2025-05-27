@@ -17,8 +17,8 @@ DROP TABLE IF EXISTS `autoescuela`.`Alumno` ;
 
 CREATE TABLE IF NOT EXISTS `autoescuela`.`Alumno` (
   `alumno_id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(255) NULL DEFAULT NULL,
-  `apellido1` VARCHAR(128) NULL DEFAULT NULL,
+  `nombre` VARCHAR(255) NOT NULL DEFAULT NULL,
+  `apellido1` VARCHAR(128) NOT NULL DEFAULT NULL,
   `apellido2` VARCHAR(128) NULL DEFAULT NULL,
   `DNI` VARCHAR(32) NOT NULL,
   `caducidad_DNI` DATE NULL DEFAULT NULL,
@@ -293,8 +293,6 @@ DROP TABLE IF EXISTS `autoescuela`.`Curso_profesor` ;
 CREATE TABLE IF NOT EXISTS `autoescuela`.`Curso_profesor` (
   `curso_id` INT NOT NULL,
   `profesor_id` INT NOT NULL,
-  PRIMARY KEY (`curso_id`),
-  INDEX `curso_prof-curso_id` (`profesor_id` ASC) VISIBLE,
   CONSTRAINT `curso-prof_curso_id`
     FOREIGN KEY (`curso_id`)
     REFERENCES `autoescuela`.`Curso` (`curso_id`)

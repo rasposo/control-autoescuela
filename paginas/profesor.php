@@ -66,11 +66,11 @@ $permisos = loadAllPermisos($pdo);
                                 <div class="form-group row">
                                     <div class="col-sm-4 mb-3 mb-sm-0"> Nombre:
                                         <input type="text" class="form-control form-control-user" id="nombre" value="<?php echo($profesor->getNombre()) ?>"
-                                        placeholder="Nombre">
+                                        placeholder="Nombre" required>
                                 </div>
                                     <div class="col-sm-4">Primer apellido:
                                         <input type="text" class="form-control form-control-user" id="apellido1" value="<?php echo($profesor->getApellido1()) ?>" 
-                                            placeholder="Apellido 1">
+                                            placeholder="Apellido 1" required>
                                     </div>
                                     <div class="col-sm-4">Segundo apellido:
                                         <input type="text" class="form-control form-control-user" id="apellido2" value="<?php echo($profesor->getApellido2()) ?>"
@@ -80,7 +80,7 @@ $permisos = loadAllPermisos($pdo);
                                 <div class="form-group row">
                                     <div class="col-sm-2 mb-3 mb-sm-0">DNI:
                                         <input type="text" class="form-control form-control-user" id="DNI" value="<?php echo($profesor->getDNI()) ?>"
-                                            placeholder="DNI">
+                                            placeholder="DNI" required>
                                     </div>
                                     <div class="col-sm-2">Fecha caducidad DNI:
                                         <input type="date" class="form-control form-control-user" id="caducidad_dni" value="<?php echo($profesor->getCaducidadDNI()) ?>"
@@ -88,11 +88,11 @@ $permisos = loadAllPermisos($pdo);
                                     </div>
                                     <div class="col-sm-2">Teléfono:
                                         <input type="text" class="form-control form-control-user" id="telefono" value="<?php echo($profesor->getTelefono()) ?>"
-                                            placeholder="Teléfono">
+                                            placeholder="Teléfono" required>
                                     </div>
                                     <div class="col-sm-6">Correo electrónico:
                                         <input type="email" class="form-control form-control-user" id="email" value="<?php echo($profesor->getEmail()) ?>"
-                                            placeholder="Correo electrónico">
+                                            placeholder="Correo electrónico" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">

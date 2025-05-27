@@ -16,7 +16,7 @@ try {
     $matricula = $_POST['matricula'];
 
     //introducimos el vehículo
-    $stmt = $pdo->prepare('INSERT INTO Vehículo (tipo, marca, matricula) VALUES (:tip, :mar, :mat)');
+    $stmt = $pdo->prepare('INSERT INTO vehiculo (tipo, marca, matricula) VALUES (:tip, :mar, :mat)');
     $stmt->execute(array(
                         ':tip' => $tipo,
                         ':mar' => $marca,

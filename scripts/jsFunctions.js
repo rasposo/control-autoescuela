@@ -1,3 +1,42 @@
+//funciones de validación
+
+function esDniValido(valor) {
+    valor = valor.toUpperCase().trim();
+
+    const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+    // DNI: 8 dígitos + letra
+    if (/^[0-9]{8}[A-Z]$/.test(valor)) {
+        const numero = valor.slice(0, 8);
+        const letra = valor.slice(-1);
+        return letras[numero % 23] === letra;
+    }
+
+    // NIE: X/Y/Z + 7 dígitos + letra
+    if (/^[XYZ][0-9]{7}[A-Z]$/.test(valor)) {
+        const letraInicial = valor.charAt(0);
+        const numero = valor.slice(1, 8);
+        const letraFinal = valor.slice(-1);
+
+        const prefijoNumerico = { 'X': '0', 'Y': '1', 'Z': '2' }[letraInicial];
+        const numeroCompleto = prefijoNumerico + numero;
+
+        return letras[numeroCompleto % 23] === letraFinal;
+    }
+
+    return false;
+}
+
+function esEmailValido(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email.trim());
+}
+
+function esTelefonoValido(telefono) {
+    const regex = /^[6789][0-9]{8}$/;
+    return regex.test(telefono.trim());
+}
+
 function llamarAPIbuscarProfesor() {
 
     //borramos búsquedas anteriores
@@ -32,74 +71,74 @@ function llamarAPIbuscarProfesor() {
 function llamarAPIguardarProfesor() {
 
     //recuperamos elementos a actualizar
-    let profesor_id =           document.getElementById("profesor_id").value;
-    let nombre =                document.getElementById("nombre").value;
+    let profesor_id =  document.getElementById("profesor_id").value;
+    let nombre =       document.getElementById("nombre").value;
     if ( nombre.length < 2 ) {
-        alert ("Por favor, introduzca un nombre");
+        alert ("Por favor, introduzca un nombre válido");
         return;
     }
-    let apellido1 =             document.getElementById("apellido1").value;
-    let apellido2=              document.getElementById("apellido2").value;
+    let apellido1 =  document.getElementById("apellido1").value;
+    let apellido2=   document.getElementById("apellido2").value;
     if ( apellido1.length < 2 || apellido2.length < 2 ) {
         alert ("Por favor, introduzca dos apellidos");
         return;
     }
-    let DNI=                    document.getElementById("DNI").value;
-    if ( DNI.length < 9 ) {
-        alert ("Por favor, introduzca un DNI correcto");
+    let DNI= document.getElementById("DNI").value;
+    if ( !esDniValido(DNI) ) {
+        alert ("El formato de DNI no es correcto");
         return;
     }
-    let caducidad_dni =         document.getElementById("caducidad_dni").value;
+    let caducidad_dni = document.getElementById("caducidad_dni").value;
     if ( caducidad_dni.length < 7 ) {
         alert ("Por favor, introduzca una fecha de caducidad correcta");
         return;
     }
-    let telefono =              document.getElementById("telefono").value;
-    if ( telefono.length < 9 || telefono.length > 12 ) {
-        alert ("Por favor, introduzca un teléfono correcto");
+    let telefono = document.getElementById("telefono").value.trim();
+    if ( !esTelefonoValido(telefono) ) {
+        alert ("El formato del número de teléfono no es correcto. Introduzca 9 cifras");
         return;
     }
-    let email =                 document.getElementById("email").value;
-    if ( email.length < 5 ) {
-        alert ("Por favor, introduzca un email correcto");
+    let email = document.getElementById("email").value;
+    if ( !esEmailValido(email) ) {
+        alert ("El formato del email no es correcto");
         return;
     }
-    let direccion =             document.getElementById("direccion").value;
+    let direccion = document.getElementById("direccion").value;
     if ( direccion.length < 5 ) {
         alert ("Por favor, introduzca una dirección correcta");
         return;
     }
-    let codigo_postal =         document.getElementById("codigo_postal").value;
-    if ( codigo_postal.length < 5 ) {
+    let codigo_postal = document.getElementById("codigo_postal").value.trim();
+    if ( codigo_postal.length != 5 ) {
         alert ("Por favor, introduzca un código postal correcto");
         return;
     }
-    let localidad =             document.getElementById("localidad").value;
-    if ( localidad.length < 5 ) {
+    let localidad = document.getElementById("localidad").value;
+    if ( localidad.length < 3 ) {
         alert ("Por favor, introduzca una localidad correcta");
         return;
     }
-    let provincia =             document.getElementById("provincia").value;
-    if ( provincia.length < 5 ) {
+    let provincia = document.getElementById("provincia").value;
+    if ( provincia.length < 3 ) {
         alert ("Por favor, introduzca una provincia correcta");
         return;
     }
-    let fecha_nacimiento =      document.getElementById("fecha_nacimiento").value;
+    let fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
     if ( fecha_nacimiento.length < 7 ) {
         alert ("Por favor, introduzca una fecha de nacimiento correcta");
         return;
     }
-    let fecha_ingreso =         document.getElementById("fecha_ingreso").value;
+    let fecha_ingreso = document.getElementById("fecha_ingreso").value;
     if ( fecha_ingreso.length < 7 ) {
         alert ("Por favor, introduzca una fecha de ingreso correcta");
         return;
     }
-    let numero_ss =             document.getElementById("numero_ss").value;
+    let numero_ss = document.getElementById("numero_ss").value;
     if ( numero_ss.length < 7 ) {
         alert ("Por favor, introduzca un número de seguridad social correcto");
         return;
     }
-    let contraseña =            document.getElementById("contraseña").value;
+    let contraseña = document.getElementById("contraseña").value;
     if ( contraseña.length < 5 ) {
         alert ("Por favor, introduzca una contraseña correcta");
         return;
@@ -319,79 +358,79 @@ function llamarAPIbuscarAlumnoPago() {
 function llamarAPIguardarAlumno() {
 
     //recuperamos elementos a actualizar
-    let alumno_id =             document.getElementById("alumno_id").value;
-    let nombre =                document.getElementById("nombre").value;
+    let alumno_id = document.getElementById("alumno_id").value;
+    let nombre =    document.getElementById("nombre").value;
     if ( nombre.length < 2 ) {
         alert ("Por favor, introduzca un nombre");
         return; 
     }
-    let apellido1 =             document.getElementById("apellido1").value;
-    let apellido2=              document.getElementById("apellido2").value;
+    let apellido1 = document.getElementById("apellido1").value;
+    let apellido2=  document.getElementById("apellido2").value;
     if ( apellido1.length < 2 || apellido2.length < 2 ) {
         alert ("Por favor, introduzca dos apellidos");
         return;
     }
-    let dni=                    document.getElementById("dni").value;
-    if ( dni.length < 9 ) {
+    let dni = document.getElementById("dni").value;
+    if ( !esDniValido(dni) ) {
         alert ("Por favor, introduzca un DNI correcto");
         return;
     }
-    let caducidad_dni =         document.getElementById("caducidad_dni").value;
+    let caducidad_dni = document.getElementById("caducidad_dni").value;
     if ( caducidad_dni.length < 7 ) {
         alert ("Por favor, introduzca una fecha de caducidad correcta");
         return;
     }
-    let telefono =              document.getElementById("telefono").value;
-    if ( telefono.length < 9 || telefono.length > 12 ) {
-        alert ("Por favor, introduzca un teléfono correcto");
+    let telefono = document.getElementById("telefono").value;
+    if ( !esTelefonoValido(telefono) ) {
+        alert ("El formato del número de teléfono no es correcto. Introduzca 9 cifras");
         return;
     }
-    let email =                 document.getElementById("email").value;
-    if ( email.length < 5 ) {
-        alert ("Por favor, introduzca un email correcto");
+    let email = document.getElementById("email").value;
+    if ( !esEmailValido(email) ) {
+        alert ("El formato del emaail no es correcto");
         return;
     }
-    let direccion =             document.getElementById("direccion").value;
+    let direccion = document.getElementById("direccion").value;
     if ( direccion.length < 5 ) {
         alert ("Por favor, introduzca una dirección correcta");
         return;
     }
-    let codigo_postal =         document.getElementById("codigo_postal").value;
+    let codigo_postal = document.getElementById("codigo_postal").value;
     if ( codigo_postal.length < 5 ) {
         alert ("Por favor, introduzca un código postal correcto");
         return;
     }
-    let localidad =             document.getElementById("localidad").value;
+    let localidad = document.getElementById("localidad").value;
     if ( localidad.length < 5 ) {
         alert ("Por favor, introduzca una localidad correcta");
         return;
     }
-    let provincia =             document.getElementById("provincia").value;
+    let provincia = document.getElementById("provincia").value;
     if ( provincia.length < 5 ) {
         alert ("Por favor, introduzca una provincia correcta");
         return;
     }
-    let nacionalidad =          document.getElementById("nacionalidad").value;
+    let nacionalidad = document.getElementById("nacionalidad").value;
     if ( nacionalidad.length < 5 ) {
         alert ("Por favor, introduzca una nacionalidad correcta");
         return;
     }
-    let fecha_nacimiento =      document.getElementById("fecha_nacimiento").value;
+    let fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
     if ( fecha_nacimiento.length < 7 ) {
         alert ("Por favor, introduzca una fecha de nacimiento correcta");
         return;
     }
-    let fecha_ingreso =         document.getElementById("fecha_ingreso").value;
+    let fecha_ingreso = document.getElementById("fecha_ingreso").value;
     if ( fecha_ingreso.length < 7 ) {
         alert ("Por favor, introduzca una fecha de ingreso correcta");
         return;
     }
-    let estudios =              document.getElementById("estudios").value;
+    let estudios = document.getElementById("estudios").value;
     if ( estudios.length < 5 ) {
         alert ("Por favor, introduzca unos estudios correctos");
         return;
     }
-    let contraseña =            document.getElementById("contraseña").value;
+    let contraseña = document.getElementById("contraseña").value;
     if ( contraseña.length < 5 ) {
         alert ("Por favor, introduzca una contraseña correcta");
         return;
@@ -1213,7 +1252,7 @@ function llamarAPIguardarAutoescuela() {
     //recuperamos elementos a actualizar
     let autoescuela_id =document.getElementById("autoescuela_id").value;
     let nombre =        document.getElementById("nombre").value;
-    if ( nombre.length < 5 ) {
+    if ( nombre.length < 3 ) {
         alert ("Por favor, introduzca un nombre correcto");
         return;
     }
@@ -1237,14 +1276,14 @@ function llamarAPIguardarAutoescuela() {
         alert ("Por favor, introduzca un D.C. correcto");
         return;
     }
-    let telefono =      document.getElementById("telefono").value;
-    if ( telefono.length < 5 ) {
-        alert ("Por favor, introduzca un teléfono correcto");
+    let telefono =      document.getElementById("telefono").value.trim();
+    if ( !esTelefonoValido(telefono) ) {
+        alert ("El formato del número de teléfono no es correcto. Introduzca 9 cifras");
         return;
     }
     let email =         document.getElementById("email").value;
-    if ( email.length < 5 ) {
-        alert ("Por favor, introduzca un email correcto");
+    if ( !esEmailValido(email) ) {
+        alert ("El formato del email no es correcto");
         return;
     }
     let direccion =     document.getElementById("direccion").value;
@@ -1252,22 +1291,22 @@ function llamarAPIguardarAutoescuela() {
         alert ("Por favor, introduzca una dirección correcta");
         return;
     }
-    let codigoPostal =  document.getElementById("codigo-postal").value;
-    if ( codigoPostal.length < 5 ) {
+    let codigoPostal =  document.getElementById("codigo-postal").value.trim();
+    if ( codigoPostal.length != 5 ) {
         alert ("Por favor, introduzca un código postal correcto");
         return;
     }
     let localidad =     document.getElementById("localidad").value;
-    if ( localidad.length < 5 ) {
+    if ( localidad.length < 3 ) {
         alert ("Por favor, introduzca una localidad correcta");
         return;
     }
     let provincia =     document.getElementById("provincia").value;
-    if ( provincia.length < 5 ) {
+    if ( provincia.length < 3 ) {
         alert ("Por favor, introduzca una provincia correcta");
         return;
     }
-    let CIF =           document.getElementById("CIF").value;
+    let CIF =           document.getElementById("CIF").value.trim();
     if ( CIF.length < 5 ) {
         alert ("Por favor, introduzca un CIF correcto");
         return;

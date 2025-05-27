@@ -1,5 +1,5 @@
 <?php
-$pdo = new PDO('mysql:host=localhost;port=8889;dbname=autoescuela', 'josefo', 'rasposo');
+$pdo = new PDO('mysql:host=localhost;port=3306;dbname=autoescuela', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //seleccion del usuario en el login

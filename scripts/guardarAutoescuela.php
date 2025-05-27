@@ -28,7 +28,7 @@ try {
 
     // PARTE 2. REALIZAR ACCIÓN
 
-    //Si no existe, $id es 1. Entonves, introducimos nueva autoescuela
+    //Si no existe, $id es 1. Entonces, introducimos nueva autoescuela
     if ($autoescuela_id == "1" ) {
         $stmt = $pdo->prepare('INSERT INTO Autoescuela (nombre,
                                                         razon_social,
@@ -98,7 +98,7 @@ try {
 	// a) Correcto
     $respuesta = new stdClass();
     $respuesta->id    = 0;
-    $respuesta->texto = "Enseñanza guardada";
+    $respuesta->texto = "Autoescuela guardada";
     $json_respuesta   = json_encode($respuesta);
     echo ($json_respuesta);
 	  
