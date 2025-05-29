@@ -40,7 +40,7 @@ require_once 'head_side.html';
 ?>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid" style="height: 81vh;">
 
 
 
