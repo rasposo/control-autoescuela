@@ -24,59 +24,58 @@ foreach ( $profesores as $profesor ) {
 
 ?>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid" style="height: 81vh;">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Nueva relación de examen</h1>
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800">Nueva relación de examen</h1>
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider my-0">
-                    <br>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        <br>
 
-                    <div class="container-fluid">
+        <div class="container-fluid">
 
-                    <!-- Formulario -->
+            <!-- Formulario -->
 
-                    <form class="user" method="POST">
-                        <div class="form-group row">
-                            <div class="col-sm-2">Fecha  de presentación:
-                                <input type="date" class="form-control form-control-user" id="fecha-presentacion"
-                                    placeholder="Fecha de presentación">
-                            </div>
-                            <div class="col-sm-2">Fecha de examen:
-                                <input type="date" class="form-control form-control-user" id="fecha-examen"
-                                    placeholder="Fecha de examen">
-                            </div>
-                        </div>                    
-                        <div class="form-group row">
-                            <div class="col-sm-4">Profesor:
-                                <select class="form-select form-control" id="profesor" name="profesor">
-                                    <option value="" selected>Selecciona un profesor</option>
-                                    <?php foreach ($lista_profes as $profesor) { ?>
-                                        <option value="<?php echo $profesor; ?>"><?php echo $profesor; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div> 
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">Tipo de prueba:
-                                <select class="form-select form-control" id="tipo-prueba" name="tipo-prueba">
-                                    <option value="Teórico" selected>Teórico</option>
-                                    <option value="Circuito cerrado">Circuito cerrado</option>
-                                    <option value="Circulación">Circulación</option>
-                                </select>
-                            </div>
-                        </div>
-                     </form>
+            <form class="user" method="POST">
+                <div class="form-group row">
+                    <div class="col-sm-2">Fecha  de presentación:
+                        <input type="date" class="form-control form-control-user" id="fecha-presentacion"
+                            placeholder="Fecha de presentación">
+                    </div>
+                    <div class="col-sm-2">Fecha de examen:
+                        <input type="date" class="form-control form-control-user" id="fecha-examen"
+                            placeholder="Fecha de examen">
+                    </div>
+                </div>                    
+                <div class="form-group row">
+                    <div class="col-sm-4">Profesor:
+                        <select class="form-select form-control" id="profesor" name="profesor">
+                            <option value="" selected>Selecciona un profesor</option>
+                            <?php foreach ($lista_profes as $profesor) { ?>
+                                <option value="<?php echo $profesor; ?>"><?php echo $profesor; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div> 
                 </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">Tipo de prueba:
+                        <select class="form-select form-control" id="tipo-prueba" name="tipo-prueba">
+                            <option value="Teórico" selected>Teórico</option>
+                            <option value="Circuito cerrado">Circuito cerrado</option>
+                            <option value="Circulación">Circulación</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
 
-                <hr class="sidebar-divider my-0">
-                        <br>
-            </div>
+            <hr class="sidebar-divider my-0">
+            <br>
+                
 
             <!-- Boton para guardar -->
-             <div class="container-fluid">
+            <div class="container-fluid">
                 <a href="#" class="btn btn-primary btn-icon-split" onclick="llamarAPInuevaRelacionExamen()">
                     <span class="icon text-white-50">
                         <i class="fa fa-save"></i>
@@ -87,7 +86,9 @@ foreach ( $profesores as $profesor ) {
                 <a href="examenes.php" class="btn btn-primary btn-icon-split">
                     <span class="text">Cancelar</span>
                 </a>
-
+            </div>
+        </div>
+    </div>
 
 
 <?php require_once 'footer.html'; ?>

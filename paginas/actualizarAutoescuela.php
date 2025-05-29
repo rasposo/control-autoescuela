@@ -50,7 +50,7 @@ require_once 'head_side.html';
 ?>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid" style="height: 81vh;">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Configuración</h1>

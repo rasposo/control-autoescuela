@@ -29,58 +29,58 @@ $hoy = date("d/m/Y");
 ?>
 
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid" >
+    <!-- Begin Page Content -->
+    <div class="container-fluid" style="height: 81vh;">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800"><span style="color:brown">Nº <?= $curso->getNumeroCurso(); ?> </span>- <?= $nombre_alumno ?><span> - Permiso <?= $permiso['tipo'] ?></span></h1>
+        <!-- Page Heading -->
+        <h1 class="h3 mb-4 text-gray-800"><span style="color:brown">Nº <?= $curso->getNumeroCurso(); ?> </span>- <?= $nombre_alumno ?><span> - Permiso <?= $permiso['tipo'] ?></span></h1>
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider my-0">
-                    <br>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        <br>
 
-                    <h2 class="h4 mb-4 text-gray-600">Introducir pago</h2>
+        <h2 class="h4 mb-4 text-gray-600">Introducir pago</h2>
 
-                    <!-- Formulario -->
-                    <form class="user" method="POST">
-                        <div class="form-group row">
-                            <div class="col-sm-2">Fecha:
-                                <input type="date" class="form-control form-control-user" id="fecha_pago" value="<?= $hoy ?>"
-                                    placeholder="<?= $hoy ?>">
-                            </div>
-                            <div class="col-sm-2">Importe
-                                <input type="number" class="form-control form-control-user" id="importe"
-                                    placeholder="€" onkeyup="PasarValorImporte();">
-                           </div>
-                            <div class="col-sm-4 mb-3 mb-sm-0">Nombre
-                                <input type="text" class="form-control form-control-user" id="concepto"
-                                    placeholder="Concepto" onkeyup="PasarValorConcepto();">
-                           </div>
-                        </div>
-                        <input type="hidden" id="nombre-alumno" value="<?= $nombre_alumno ?>">
-                        <input type="hidden" id="nombre-curso" value="Curso <?= $permiso['tipo'] ?>">
-                    </form>
-                    <br>
-
-                    <!-- Boton para introducir pago -->
-                    <div class="container-fluid">
-                        <a href="#" class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#introducirPago">
-                            <span class="icon text-white-50">
-                               <!-- <i class="fa fa-euro"></i> -->
-                            </span>
-                            <span class="text">Introducir pago</span>
-                        </a>
-                    <!-- cancelar -->
-                        <a href="curso.php?curso_id=<?= $_GET['curso_id']; ?>" class="btn btn-secondary btn-icon-split">
-                            <span class="text">Cancelar</span>
-                        </a>
-                    </div>
-                    <br>
-
+        <!-- Formulario -->
+        <form class="user" method="POST">
+            <div class="form-group row">
+                <div class="col-sm-2">Fecha:
+                    <input type="date" class="form-control form-control-user" id="fecha_pago" value="<?= $hoy ?>"
+                        placeholder="<?= $hoy ?>">
                 </div>
+                <div class="col-sm-2">Importe
+                    <input type="number" class="form-control form-control-user" id="importe"
+                        placeholder="€" onkeyup="PasarValorImporte();">
+                </div>
+                <div class="col-sm-4 mb-3 mb-sm-0">Nombre
+                    <input type="text" class="form-control form-control-user" id="concepto"
+                        placeholder="Concepto" onkeyup="PasarValorConcepto();">
+                </div>
+            </div>
+            <input type="hidden" id="nombre-alumno" value="<?= $nombre_alumno ?>">
+            <input type="hidden" id="nombre-curso" value="Curso <?= $permiso['tipo'] ?>">
+        </form>
+        <br>
 
-<!-- Introducir pago-->
-<div class="modal fade" id="introducirPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <!-- Boton para introducir pago -->
+        <div class="container-fluid">
+            <a href="#" class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#introducirPago">
+                <span class="icon text-white-50">
+                    <!-- <i class="fa fa-euro"></i> -->
+                </span>
+                <span class="text">Introducir pago</span>
+            </a>
+        <!-- cancelar -->
+            <a href="curso.php?curso_id=<?= $_GET['curso_id']; ?>" class="btn btn-secondary btn-icon-split">
+                <span class="text">Cancelar</span>
+            </a>
+        </div>
+        <br>
+
+    </div>
+
+    <!-- Introducir pago-->
+    <div class="modal fade" id="introducirPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -104,7 +104,7 @@ $hoy = date("d/m/Y");
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 <script type="text/javascript">
 
