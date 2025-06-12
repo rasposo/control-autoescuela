@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `autoescuela`.`Alumno` (
   `estudios` VARCHAR(255) NULL DEFAULT NULL,
   `telefono` INT NULL DEFAULT NULL,
   `email` VARCHAR(255) NULL DEFAULT NULL,
-  `contraseña` VARCHAR(45) NULL DEFAULT NULL,
+  `contraseña` VARCHAR(128) NULL DEFAULT NULL,
   PRIMARY KEY (`alumno_id`),
   UNIQUE INDEX `DNI_UNIQUE` (`DNI` ASC) VISIBLE,
   UNIQUE INDEX `alumno_id_UNIQUE` (`alumno_id` ASC) VISIBLE,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `autoescuela`.`Autoescuela` (
   `direccion` VARCHAR(255) NULL DEFAULT NULL,
   `codigo_postal` INT NULL DEFAULT NULL,
   `localidad` VARCHAR(128) NULL DEFAULT NULL,
-  `provincia` VARCHAR(45) NULL DEFAULT NULL,
+  `provincia` VARCHAR(128) NULL DEFAULT NULL,
   `CIF` INT NULL DEFAULT NULL,
   `IVA` INT NULL DEFAULT NULL,
   `DC` INT NULL DEFAULT NULL,
@@ -97,11 +97,11 @@ CREATE TABLE IF NOT EXISTS `autoescuela`.`Profesor` (
   `caducidad_DNI` DATE NULL DEFAULT NULL,
   `direccion` VARCHAR(255) NULL DEFAULT NULL,
   `localidad` VARCHAR(128) NULL DEFAULT NULL,
-  `provincia` VARCHAR(45) NULL DEFAULT NULL,
+  `provincia` VARCHAR(50) NULL DEFAULT NULL,
   `codigo_postal` INT NULL DEFAULT NULL,
   `fecha_nacimiento` DATE NULL DEFAULT NULL,
   `fecha_ingreso` DATE NULL DEFAULT NULL,
-  `numero_ss` INT NULL DEFAULT NULL,
+  `numero_ss` BIGINT NULL DEFAULT NULL,
   `perfil_director` TINYINT NULL DEFAULT NULL,
   `perfil_administrad` TINYINT NULL DEFAULT NULL,
   `telefono` INT NULL DEFAULT NULL,
@@ -192,7 +192,7 @@ DROP TABLE IF EXISTS `autoescuela`.`Tasa` ;
 
 CREATE TABLE IF NOT EXISTS `autoescuela`.`Tasa` (
   `tasa_id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(20) NULL DEFAULT NULL,
+  `tipo` VARCHAR(128) NULL DEFAULT NULL,
   `precio` FLOAT NULL DEFAULT NULL,
   PRIMARY KEY (`tasa_id`))
 ENGINE = InnoDB
@@ -234,7 +234,7 @@ DROP TABLE IF EXISTS `autoescuela`.`Enseñanza` ;
 CREATE TABLE IF NOT EXISTS `autoescuela`.`Enseñanza` (
   `enseñanza_id` INT NOT NULL AUTO_INCREMENT,
   `permiso_id` INT NULL DEFAULT NULL,
-  `tipo` VARCHAR(20) NULL DEFAULT NULL,
+  `tipo` VARCHAR(128) NULL DEFAULT NULL,
   `precio` INT NULL DEFAULT NULL,
   PRIMARY KEY (`enseñanza_id`),
   INDEX `permiso_id_fk` (`permiso_id` ASC) VISIBLE,
@@ -314,8 +314,8 @@ DROP TABLE IF EXISTS `autoescuela`.`Vehiculo` ;
 
 CREATE TABLE IF NOT EXISTS `autoescuela`.`Vehiculo` (
   `vehiculo_id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(20) NULL DEFAULT NULL,
-  `marca` VARCHAR(20) NULL DEFAULT NULL,
+  `tipo` VARCHAR(50) NULL DEFAULT NULL,
+  `marca` VARCHAR(50) NULL DEFAULT NULL,
   `matricula` VARCHAR(10) NULL DEFAULT NULL,
   PRIMARY KEY (`vehiculo_id`),
   UNIQUE INDEX `matricula` (`matricula` ASC) VISIBLE)
@@ -334,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `autoescuela`.`Relacion_examen` (
   `profesor_id` INT NOT NULL,
   `fecha_presentacion` DATE NULL DEFAULT NULL,
   `fecha_examen` DATE NULL DEFAULT NULL,
-  `tipo_prueba` VARCHAR(25) NULL DEFAULT NULL,
+  `tipo_prueba` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`relacion_id`),
   INDEX `fk_relacion_examen_profesor_id` (`profesor_id` ASC) VISIBLE,
   CONSTRAINT `fk_relacion_examen_profesor_id`
@@ -411,10 +411,10 @@ CREATE TABLE IF NOT EXISTS `autoescuela`.`Pago` (
   `curso_id` INT NOT NULL,
   `fecha` DATE NULL DEFAULT NULL,
   `importe` FLOAT NULL DEFAULT NULL,
-  `concepto` VARCHAR(45) NULL DEFAULT NULL,
-  `numero_recibo` VARCHAR(20) NULL DEFAULT NULL,
+  `concepto` VARCHAR(128) NULL DEFAULT NULL,
+  `numero_recibo` VARCHAR(40) NULL DEFAULT NULL,
   `anulado` INT NULL DEFAULT NULL,
-  `motivo_anulado` VARCHAR(24) NULL DEFAULT NULL,
+  `motivo_anulado` VARCHAR(128) NULL DEFAULT NULL,
   PRIMARY KEY (`pago_id`),
   INDEX `fk_Pago_curso_id` (`curso_id` ASC) VISIBLE,
   CONSTRAINT `fk_Pago_curso_id`
