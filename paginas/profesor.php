@@ -245,7 +245,7 @@ $permisos = loadAllPermisos($pdo);
                             <span class="text">Guardar</span>
                             </a>
                         <!-- Cancelar -->
-                        <a href="profesores.php" class="btn btn-primary btn-icon-split">
+                        <a href="profesores.php" class="btn btn-secondary btn-icon-split">
                             <span class="text">Cancelar</span>
                         </a>
 

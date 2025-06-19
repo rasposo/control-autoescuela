@@ -40,17 +40,17 @@ foreach ( $profesores as $profesor ) {
 
             <form class="user" method="POST">
                 <div class="form-group row">
-                    <div class="col-sm-2">Fecha  de presentación:
+                    <div class="col-sm-3">Fecha  de presentación:
                         <input type="date" class="form-control form-control-user" id="fecha-presentacion"
                             placeholder="Fecha de presentación">
                     </div>
-                    <div class="col-sm-2">Fecha de examen:
+                    <div class="col-sm-3">Fecha de examen:
                         <input type="date" class="form-control form-control-user" id="fecha-examen"
                             placeholder="Fecha de examen">
                     </div>
                 </div>                    
                 <div class="form-group row">
-                    <div class="col-sm-4">Profesor:
+                    <div class="col-sm-6">Profesor:
                         <select class="form-select form-control" id="profesor" name="profesor">
                             <option value="" selected>Selecciona un profesor</option>
                             <?php foreach ($lista_profes as $profesor) { ?>
@@ -60,7 +60,7 @@ foreach ( $profesores as $profesor ) {
                     </div> 
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-4">Tipo de prueba:
+                    <div class="col-sm-6">Tipo de prueba:
                         <select class="form-select form-control" id="tipo-prueba" name="tipo-prueba">
                             <option value="Teórico" selected>Teórico</option>
                             <option value="Circuito cerrado">Circuito cerrado</option>
@@ -83,7 +83,7 @@ foreach ( $profesores as $profesor ) {
                     <span class="text">Guardar</span>
                 </a>
             <!-- cancelar -->
-                <a href="examenes.php" class="btn btn-primary btn-icon-split">
+                <a href="examenes.php" class="btn btn-secondary btn-icon-split">
                     <span class="text">Cancelar</span>
                 </a>
             </div>

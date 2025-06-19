@@ -132,7 +132,7 @@ require_once 'head_side.html';
                             <span class="text">Guardar</span>
                         </a>
                         <!-- cancelar -->
-                        <a href="alumnos.php" class="btn btn-primary btn-icon-split">
+                        <a href="alumnos.php" class="btn btn-secondary btn-icon-split">
                             <span class="text">Cancelar</span>
                         </a>
 

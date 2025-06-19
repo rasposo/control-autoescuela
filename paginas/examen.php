@@ -245,44 +245,46 @@ require_once 'head_side.html';
 <!-- Modal nuevo inscrito -->
 <div class="modal fade" id="nuevo-inscrito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Inscribir alumno</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="user" method="POST">Nombre del alumno:
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-gradient-light border-1 small" placeholder="Buscar..."
-                                    aria-label="Search" aria-describedby="basic-addon2" id="nombre-alumno-inscribir">
-                            <div class="input-group-append">
-                              <button class="btn btn-primary" type="button" onclick="llamarAPIbuscarAlumnoInscribir()">
-                                      <i class="fas fa-search fa-sm"></i>
-                              </button>
-                            </div>
-                        </div>                        
-                    </form>
-                    <br>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="tabla-alumno-inscribir" width="80%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Alumno</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cuerpo-tabla-inscribir">
-                            </tbody>
-                        </table>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Inscribir alumno</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="user" method="POST">Nombre del alumno:
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-gradient-light border-1 small" placeholder="Buscar..."
+                                aria-label="Search" aria-describedby="basic-addon2" id="nombre-alumno-inscribir">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" onclick="llamarAPIbuscarAlumnoInscribir()">
+                                    <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-primary" href="examen.php?relacion_id=<?= $relacion_id ?>" >Cancelar</a>
+                    <p><small class="text-muted">* Solo se muestran resultados de alumnos con cursos en activo</small></p>                        
+                </form>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla-alumno-inscribir" width="80%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Alumno</th>
+                                <th>Curso</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla-inscribir">
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" href="examen.php?relacion_id=<?= $relacion_id ?>" >Cancelar</a>
+            </div>
         </div>
+    </div>
 </div>
 
 
